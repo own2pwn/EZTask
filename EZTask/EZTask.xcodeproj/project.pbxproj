@@ -13,9 +13,12 @@
 		4C0E8C391E7E9D47005A3C19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C0E8C381E7E9D47005A3C19 /* Assets.xcassets */; };
 		4C0E8C3C1E7E9D47005A3C19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C0E8C3A1E7E9D47005A3C19 /* LaunchScreen.storyboard */; };
 		4C1BFCB71E7EB034000A2282 /* KZSwipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1BFCB61E7EB034000A2282 /* KZSwipeTableViewCell.swift */; };
+		8FD705EE4F808657E756F35E /* Pods_EZTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3222A67AC8F89353FEC486 /* Pods_EZTask.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11384261F24162A9C3B52DC6 /* Pods-EZTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-EZTask/Pods-EZTask.release.xcconfig"; sourceTree = "<group>"; };
+		1AA7B0E9525332CB7BD194C2 /* Pods-EZTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZTask.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EZTask/Pods-EZTask.debug.xcconfig"; sourceTree = "<group>"; };
 		4C0E8C2E1E7E9D47005A3C19 /* EZTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EZTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C0E8C311E7E9D47005A3C19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C0E8C331E7E9D47005A3C19 /* ToDoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoController.swift; sourceTree = "<group>"; };
@@ -24,6 +27,7 @@
 		4C0E8C3B1E7E9D47005A3C19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C0E8C3D1E7E9D47005A3C19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C1BFCB61E7EB034000A2282 /* KZSwipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KZSwipeTableViewCell.swift; sourceTree = "<group>"; };
+		FD3222A67AC8F89353FEC486 /* Pods_EZTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FD705EE4F808657E756F35E /* Pods_EZTask.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E3F00B86B889468613CAE13 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FD3222A67AC8F89353FEC486 /* Pods_EZTask.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4C0E8C251E7E9D47005A3C19 = {
 			isa = PBXGroup;
 			children = (
 				4C0E8C301E7E9D47005A3C19 /* EZTask */,
 				4C0E8C2F1E7E9D47005A3C19 /* Products */,
+				893524079556A81A2D4F2B5B /* Pods */,
+				2E3F00B86B889468613CAE13 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,6 +130,15 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		893524079556A81A2D4F2B5B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1AA7B0E9525332CB7BD194C2 /* Pods-EZTask.debug.xcconfig */,
+				11384261F24162A9C3B52DC6 /* Pods-EZTask.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,10 +146,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4C0E8C401E7E9D47005A3C19 /* Build configuration list for PBXNativeTarget "EZTask" */;
 			buildPhases = (
+				A113847851D0D1CC84B2E512 /* [CP] Check Pods Manifest.lock */,
 				4CB5A3971E7EAB85002DA155 /* ShellScript */,
 				4C0E8C2A1E7E9D47005A3C19 /* Sources */,
 				4C0E8C2B1E7E9D47005A3C19 /* Frameworks */,
 				4C0E8C2C1E7E9D47005A3C19 /* Resources */,
+				8D5192CE4964D815AAF2C32F /* [CP] Embed Pods Frameworks */,
+				AE1AE2FAB26630DD82B59AB7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -197,6 +224,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cd \"$(PROJECT_DIR)\"\npwd";
+		};
+		8D5192CE4964D815AAF2C32F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EZTask/Pods-EZTask-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A113847851D0D1CC84B2E512 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AE1AE2FAB26630DD82B59AB7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EZTask/Pods-EZTask-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -328,6 +400,7 @@
 		};
 		4C0E8C411E7E9D47005A3C19 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AA7B0E9525332CB7BD194C2 /* Pods-EZTask.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VD97XKT54M;
@@ -342,6 +415,7 @@
 		};
 		4C0E8C421E7E9D47005A3C19 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11384261F24162A9C3B52DC6 /* Pods-EZTask.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VD97XKT54M;
