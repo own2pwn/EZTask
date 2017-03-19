@@ -99,7 +99,14 @@ extension ToDoController
         cell.setSwipeGestureWith(checkView, color: greenColor, mode: .exit, state: .state1, completionBlock: { (cell, state, mode) -> Void in
             print("Marked task as done")
             
-            self.deleteCell(cell)
+            if (indexPath.section == 0)
+            {
+                self.markTaskCompleted(cell)
+            }
+            else
+            {
+                self.unmarkTaskCompleted(cell)
+            }
         })
         
         cell.setSwipeGestureWith(clockView, color: yellowColor, mode: .switch, state: .state3, completionBlock: { (cell, state, mode) -> Void in
@@ -112,7 +119,7 @@ extension ToDoController
         
     }
     
-    func deleteCell(_ cell: KZSwipeTableViewCell)
+    func markTaskCompleted(_ cell: KZSwipeTableViewCell)
     {
         openTasks -= 1
         if let indexPath = toDoTableView.indexPath(for: cell)
@@ -120,6 +127,18 @@ extension ToDoController
             toDoTableView.deleteRows(at: [indexPath], with: .fade)
             let nPath = IndexPath(row: 0, section: 1)
             completedTasks += 1
+            toDoTableView.insertRows(at: [nPath], with: .fade)
+        }
+    }
+    
+    func unmarkTaskCompleted(_ cell: KZSwipeTableViewCell)
+    {
+        completedTasks -= 1
+        if let indexPath = toDoTableView.indexPath(for: cell)
+        {
+            toDoTableView.deleteRows(at: [indexPath], with: .fade)
+            let nPath = IndexPath(row: 0, section: 0)
+            openTasks += 1
             toDoTableView.insertRows(at: [nPath], with: .fade)
         }
     }
@@ -149,6 +168,15 @@ extension ToDoController: UITableViewDataSource
         let cell = KZSwipeTableViewCell(style: .subtitle, reuseIdentifier: toDoCellIdentifier)
         
         configureCell(cell, indexPath: indexPath)
+        
+        let section = indexPath.section
+        
+        if section == 1
+        {
+            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: (cell.textLabel?.text)!)
+            attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributeString.length))
+            cell.textLabel?.attributedText = attributeString
+        }
         
         return cell
     }
