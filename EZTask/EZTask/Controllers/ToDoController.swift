@@ -74,8 +74,6 @@ extension ToDoController
         let checkView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "checkMarkIcon"))
         let greenColor = UIColor(red: 85.0 / 255.0, green: 213.0 / 255.0, blue: 80.0 / 255.0, alpha: 1.0)
         
-        let crossView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "crossIcon"))
-        let redColor = UIColor(red: 232.0 / 255.0, green: 61.0 / 255.0, blue: 14.0 / 255.0, alpha: 1.0)
         
         let clockView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "watchesIcon"))
         let yellowColor = UIColor(red: 254.0 / 255.0, green: 217.0 / 255.0, blue: 56.0 / 255.0, alpha: 1.0)
@@ -94,6 +92,8 @@ extension ToDoController
         cell.textLabel?.text = "Task"
         cell.detailTextLabel?.text = "Subtitle"
         cell.settings.secondTrigger = 0.66
+        cell.settings.startImmediately = true
+        cell.selectionStyle = .none
         
         // TODO: make deletion on right side & change secondTrigger to a smaller value
         
