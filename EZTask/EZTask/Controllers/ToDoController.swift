@@ -43,19 +43,18 @@ extension ToDoController: UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
     {
-        let more = UITableViewRowAction(style: .normal, title: "More")
+        let timer = UITableViewRowAction(style: .normal, title: "\u{231A}")
         { action, index in
             print("More")
         }
-        more.backgroundColor = .lightGray
-        
-        let del = UITableViewRowAction(style: .normal, title: "dele")
+        timer.backgroundColor = .yellow
+
+        let del = UITableViewRowAction(style: .default, title: "\u{274C}")
         { action, index in
             print("delete")
         }
         del.backgroundColor = .red
-        
-        return [del, more]
+        return [del, timer]
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return true }
