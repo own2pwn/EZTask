@@ -118,9 +118,8 @@ extension ToDoController
         if let indexPath = toDoTableView.indexPath(for: cell)
         {
             toDoTableView.deleteRows(at: [indexPath], with: .fade)
-            let nPath = IndexPath(row: completedTasks + 1, section: 1)
-            completedTasks += 1
-            toDoTableView.insertRows(at: [nPath], with: .fade)
+            
+            toDoTableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
         }
     }
 }
