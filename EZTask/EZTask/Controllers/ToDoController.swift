@@ -98,17 +98,19 @@ extension ToDoController
 
             cell.setSwipeGestureWith(checkView, color: greenColor, mode: .exit, state: .state1, completionBlock: { (cell, state, mode) -> Void in
                 print("Marked task as done")
+
+                self.deleteCell(cell)
             })
 
-            cell.setSwipeGestureWith(crossView, color: redColor, mode: .exit, state: .state2, completionBlock: { (cell, state, mode) -> Void in
+            cell.setSwipeGestureWith(crossView, color: redColor, mode: .switch, state: .state2, completionBlock: { (cell, state, mode) -> Void in
                 print("Deleting task")
             })
 
-            cell.setSwipeGestureWith(clockView, color: yellowColor, mode: .exit, state: .state3, completionBlock: { (cell, state, mode) -> Void in
+            cell.setSwipeGestureWith(clockView, color: yellowColor, mode: .switch, state: .state3, completionBlock: { (cell, state, mode) -> Void in
                 print("Snoozing task")
             })
 
-            cell.setSwipeGestureWith(listView, color: brownColor, mode: .exit, state: .state4, completionBlock: { (cell, state, mode) -> Void in
+            cell.setSwipeGestureWith(listView, color: brownColor, mode: .switch, state: .state4, completionBlock: { (cell, state, mode) -> Void in
                 print("Changing list of task")
             })
         }
@@ -117,7 +119,7 @@ extension ToDoController
             cell.textLabel?.text = "Task"
             cell.detailTextLabel?.text = "Subtitle"
 
-            cell.setSwipeGestureWith(checkView, color: greenColor, mode: .switch, state: .state1, completionBlock: { (cell, state, mode) -> Void in
+            cell.setSwipeGestureWith(checkView, color: greenColor, mode: .exit, state: .state1, completionBlock: { (cell, state, mode) -> Void in
                 print("Marked task as done")
             })
 
@@ -137,6 +139,15 @@ extension ToDoController
             toDoTableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+
+    func deleteCell(_ cell: KZSwipeTableViewCell)
+    {
+        numOfItems -= 1
+        if let indexPath = toDoTableView.indexPath(for: cell)
+        {
+            toDoTableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 }
 
 extension ToDoController: UITableViewDataSource
@@ -145,7 +156,7 @@ extension ToDoController: UITableViewDataSource
     {
         // TODO: change
 
-        return 7
+        return numOfItems
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
