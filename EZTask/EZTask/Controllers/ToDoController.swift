@@ -90,6 +90,11 @@ extension ToDoController
         {
             cell.textLabel?.text = "Task"
             cell.detailTextLabel?.text = "Subtitle"
+            cell.settings.secondTrigger = 0.66
+
+            // TODO: make deletion on right side & change secondTrigger to a smaller value
+
+            // TODO: add gradient & animation on color changing
 
             cell.setSwipeGestureWith(checkView, color: greenColor, mode: .switch, state: .state1, completionBlock: { (cell, state, mode) -> Void in
                 print("Marked task as done")
