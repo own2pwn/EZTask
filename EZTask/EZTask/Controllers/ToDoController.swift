@@ -115,12 +115,12 @@ extension ToDoController
     func deleteCell(_ cell: KZSwipeTableViewCell)
     {
         openTasks -= 1
-        completedTasks += 1
         if let indexPath = toDoTableView.indexPath(for: cell)
         {
             toDoTableView.deleteRows(at: [indexPath], with: .fade)
-            
-            toDoTableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
+            let nPath = IndexPath(row: 0, section: 1)
+            completedTasks += 1
+            toDoTableView.insertRows(at: [nPath], with: .fade)
         }
     }
 }
