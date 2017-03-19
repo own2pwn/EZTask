@@ -173,9 +173,11 @@ extension ToDoController: UITableViewDataSource
         
         if section == 1
         {
-            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: (cell.textLabel?.text)!)
+            let attributeString = NSMutableAttributedString(string: (cell.textLabel?.text)!)
             attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributeString.length))
+            
             cell.textLabel?.attributedText = attributeString
+            cell.backgroundColor = .lightGray
         }
         
         return cell
