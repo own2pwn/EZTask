@@ -149,6 +149,11 @@ extension ToDoController: UITableViewDataSource
 
         return numOfItems
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int
+    {
+        return 2
+    }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
