@@ -6,6 +6,7 @@ target 'EZTask' do
   use_frameworks!
 
   pod 'RealmSwift'
+  pod 'ChameleonFramework/Swift'
 
 end
 
