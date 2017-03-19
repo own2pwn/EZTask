@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Chameleon
 
 class ToDoController: UIViewController
 {
@@ -20,7 +21,9 @@ class ToDoController: UIViewController
     
     var openTasks = 7
     
-    var completedTasks = 2
+    var completedTasks = 0
+    
+    fileprivate let sectionsNumber = 2
     
     // MARK: - Life cycle
     
@@ -160,7 +163,7 @@ extension ToDoController: UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int
     {
-        return 2
+        return sectionsNumber
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -177,12 +180,11 @@ extension ToDoController: UITableViewDataSource
             attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributeString.length))
             
             cell.textLabel?.attributedText = attributeString
-            cell.backgroundColor = .lightGray
+            cell.backgroundColor = .flatWhite
         }
         
         return cell
     }
-    
 }
 
 // MARK: Other
