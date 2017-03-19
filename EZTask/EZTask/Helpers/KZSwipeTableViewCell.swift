@@ -656,6 +656,13 @@ open class KZSwipeTableViewCell: UITableViewCell
         return imageView
     }
     
+    open class func viewWithImage(_ image: UIImage) -> UIView
+    {
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = UIViewContentMode.center
+        return imageView
+    }
+    
     func executeCompletionBlock()
     {
         let state = stateWithPercentage(currentPercentage)

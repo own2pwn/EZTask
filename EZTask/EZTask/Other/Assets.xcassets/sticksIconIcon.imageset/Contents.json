@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "sticksIconIcon.png",
+      "filename" : "sticksIcon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "sticksIconIcon@2x.png",
+      "filename" : "sticksIcon@2x.png",
       "scale" : "2x"
     },
     {

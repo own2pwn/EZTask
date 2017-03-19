@@ -66,16 +66,16 @@ extension ToDoController
 {
     func configureCell(_ cell: KZSwipeTableViewCell, indexPath: IndexPath)
     {
-        let checkView = KZSwipeTableViewCell.viewWithImageName("checkMarkIcon")
+        let checkView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "checkMarkIcon"))
         let greenColor = UIColor(red: 85.0 / 255.0, green: 213.0 / 255.0, blue: 80.0 / 255.0, alpha: 1.0)
 
-        let crossView = KZSwipeTableViewCell.viewWithImageName("cross")
+        let crossView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "crossIcon"))
         let redColor = UIColor(red: 232.0 / 255.0, green: 61.0 / 255.0, blue: 14.0 / 255.0, alpha: 1.0)
 
-        let clockView = KZSwipeTableViewCell.viewWithImageName("clock")
+        let clockView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "watchesIcon"))
         let yellowColor = UIColor(red: 254.0 / 255.0, green: 217.0 / 255.0, blue: 56.0 / 255.0, alpha: 1.0)
 
-        let listView = KZSwipeTableViewCell.viewWithImageName("list")
+        let listView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "sticksIconIcon"))
         let brownColor = UIColor(red: 206.0 / 255.0, green: 149.0 / 255.0, blue: 98.0 / 255.0, alpha: 1.0)
 
         if let bgView = self.toDoTableView.backgroundView
