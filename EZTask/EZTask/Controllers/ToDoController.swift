@@ -126,7 +126,6 @@ extension ToDoController
             })
 
             cell.setSwipeGestureWith(clockView, color: yellowColor, mode: .none, state: .state3)
-
         }
     }
 
