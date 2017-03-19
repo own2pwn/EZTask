@@ -191,7 +191,7 @@ open class KZSwipeTableViewCell: UITableViewCell
     
     // MARK: Swipe Config
     
-    open func setSwipeGestureWith(_ view: UIView, color: UIColor, mode: KZSwipeTableViewCellMode = .none, state: KZSwipeTableViewCellState = .state1, completionBlock: @escaping KZSwipeCompletionBlock)
+    open func setSwipeGestureWith(_ view: UIView, color: UIColor, mode: KZSwipeTableViewCellMode = .none, state: KZSwipeTableViewCellState = .state1, completionBlock: @escaping KZSwipeCompletionBlock = { _ in })
     {
         if state == .state1
         {

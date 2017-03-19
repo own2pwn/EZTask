@@ -125,7 +125,7 @@ extension ToDoController
                 print("Deleting task")
             })
 
-            cell.setSwipeGestureWith(clockView, color: yellowColor, mode: .none, state: .state3, completionBlock: { (cell, state, mode) -> Void in })
+            cell.setSwipeGestureWith(clockView, color: yellowColor, mode: .none, state: .state3)
 
         }
     }
