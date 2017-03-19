@@ -12,6 +12,7 @@
 		4C0E8C371E7E9D47005A3C19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C0E8C351E7E9D47005A3C19 /* Main.storyboard */; };
 		4C0E8C391E7E9D47005A3C19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C0E8C381E7E9D47005A3C19 /* Assets.xcassets */; };
 		4C0E8C3C1E7E9D47005A3C19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C0E8C3A1E7E9D47005A3C19 /* LaunchScreen.storyboard */; };
+		4C1BFCB71E7EB034000A2282 /* KZSwipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1BFCB61E7EB034000A2282 /* KZSwipeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		4C0E8C381E7E9D47005A3C19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C0E8C3B1E7E9D47005A3C19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C0E8C3D1E7E9D47005A3C19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C1BFCB61E7EB034000A2282 /* KZSwipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KZSwipeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +72,6 @@
 				4C0E8C311E7E9D47005A3C19 /* AppDelegate.swift */,
 				4C0E8C331E7E9D47005A3C19 /* ToDoController.swift */,
 			);
-			name = Controllers;
 			path = Controllers;
 			sourceTree = "<group>";
 		};
@@ -78,7 +79,6 @@
 			isa = PBXGroup;
 			children = (
 			);
-			name = View;
 			path = View;
 			sourceTree = "<group>";
 		};
@@ -86,15 +86,14 @@
 			isa = PBXGroup;
 			children = (
 			);
-			name = Model;
 			path = Model;
 			sourceTree = "<group>";
 		};
 		4CB5A3941E7EA9D7002DA155 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				4C1BFCB61E7EB034000A2282 /* KZSwipeTableViewCell.swift */,
 			);
-			name = Helpers;
 			path = Helpers;
 			sourceTree = "<group>";
 		};
@@ -103,7 +102,6 @@
 			children = (
 				4C0E8C351E7E9D47005A3C19 /* Main.storyboard */,
 			);
-			name = GUI;
 			path = GUI;
 			sourceTree = "<group>";
 		};
@@ -114,7 +112,6 @@
 				4C0E8C3D1E7E9D47005A3C19 /* Info.plist */,
 				4C0E8C3A1E7E9D47005A3C19 /* LaunchScreen.storyboard */,
 			);
-			name = Other;
 			path = Other;
 			sourceTree = "<group>";
 		};
@@ -125,6 +122,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4C0E8C401E7E9D47005A3C19 /* Build configuration list for PBXNativeTarget "EZTask" */;
 			buildPhases = (
+				4CB5A3971E7EAB85002DA155 /* ShellScript */,
 				4C0E8C2A1E7E9D47005A3C19 /* Sources */,
 				4C0E8C2B1E7E9D47005A3C19 /* Frameworks */,
 				4C0E8C2C1E7E9D47005A3C19 /* Resources */,
@@ -150,6 +148,7 @@
 				TargetAttributes = {
 					4C0E8C2D1E7E9D47005A3C19 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = VD97XKT54M;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -185,6 +184,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4CB5A3971E7EAB85002DA155 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$(PROJECT_DIR)\"\npwd";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4C0E8C2A1E7E9D47005A3C19 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -192,6 +207,7 @@
 			files = (
 				4C0E8C341E7E9D47005A3C19 /* ToDoController.swift in Sources */,
 				4C0E8C321E7E9D47005A3C19 /* AppDelegate.swift in Sources */,
+				4C1BFCB71E7EB034000A2282 /* KZSwipeTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,7 +330,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VD97XKT54M;
 				INFOPLIST_FILE = EZTask/Other/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pp.eguene.EZTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -326,7 +344,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VD97XKT54M;
 				INFOPLIST_FILE = EZTask/Other/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pp.eguene.EZTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
