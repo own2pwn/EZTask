@@ -116,6 +116,7 @@ extension ToDoController
         if let indexPath = toDoTableView.indexPath(for: cell)
         {
             toDoTableView.deleteRows(at: [indexPath], with: .fade)
+            toDoTableView.reloadSections(IndexSet(integer: 1), with: .automatic)
         }
     }
 }
@@ -126,7 +127,12 @@ extension ToDoController: UITableViewDataSource
     {
         // TODO: change
         
-        return numOfItems
+        if section == 0
+        {
+            return numOfItems
+        }
+        
+        return 3
     }
     
     func numberOfSections(in tableView: UITableView) -> Int
