@@ -131,15 +131,6 @@ extension ToDoController
         }
     }
 
-    func deleteCell(cell: KZSwipeTableViewCell)
-    {
-        numOfItems -= 1
-        if let indexPath = self.toDoTableView.indexPath(for: cell)
-        {
-            toDoTableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-
     func deleteCell(_ cell: KZSwipeTableViewCell)
     {
         numOfItems -= 1
