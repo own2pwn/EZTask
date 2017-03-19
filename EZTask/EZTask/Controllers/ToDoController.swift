@@ -18,7 +18,9 @@ class ToDoController: UIViewController
     
     fileprivate let toDoCellIdentifier = "idToDoCell"
     
-    var numOfItems = 7
+    var openTasks = 7
+    
+    var completedTasks = 2
     
     // MARK: - Life cycle
     
@@ -112,11 +114,13 @@ extension ToDoController
     
     func deleteCell(_ cell: KZSwipeTableViewCell)
     {
-        numOfItems -= 1
+        openTasks -= 1
         if let indexPath = toDoTableView.indexPath(for: cell)
         {
             toDoTableView.deleteRows(at: [indexPath], with: .fade)
-            toDoTableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+            let nPath = IndexPath(row: completedTasks + 1, section: 1)
+            completedTasks += 1
+            toDoTableView.insertRows(at: [nPath], with: .fade)
         }
     }
 }
@@ -129,10 +133,10 @@ extension ToDoController: UITableViewDataSource
         
         if section == 0
         {
-            return numOfItems
+            return openTasks
         }
         
-        return 3
+        return completedTasks
     }
     
     func numberOfSections(in tableView: UITableView) -> Int
