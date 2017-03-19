@@ -49,19 +49,13 @@ extension ToDoController: UITableViewDelegate
         }
         more.backgroundColor = .lightGray
         
-        let favorite = UITableViewRowAction(style: .normal, title: "Change list")
+        let del = UITableViewRowAction(style: .normal, title: "dele")
         { action, index in
-            print("Change list")
+            print("delete")
         }
-        favorite.backgroundColor = .orange
+        del.backgroundColor = .red
         
-        let share = UITableViewRowAction(style: .normal, title: "Snooze")
-        { action, index in
-            print("Snooze")
-        }
-        share.backgroundColor = .blue
-        
-        return [share, favorite, more]
+        return [del, more]
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return true }
@@ -112,13 +106,10 @@ extension ToDoController
             }
         })
         
-        cell.setSwipeGestureWith(clockView, color: yellowColor, mode: .switch, state: .state3, completionBlock: { (cell, state, mode) -> Void in
+        cell.setSwipeGestureWith(clockView, color: yellowColor, mode: .none, state: .state3, completionBlock: { (cell, state, mode) -> Void in
             print("Snoozing task")
         })
         
-        cell.setSwipeGestureWith(listView, color: brownColor, mode: .switch, state: .state4, completionBlock: { (cell, state, mode) -> Void in
-            print("Changing list of task")
-        })
         
     }
     
