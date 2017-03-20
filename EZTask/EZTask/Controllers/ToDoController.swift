@@ -37,6 +37,28 @@ class ToDoController: UIViewController
 
 // MARK: - Extensions
 
+// MARK: - Scrolling 
+
+extension ToDoController
+{
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
+    {
+        if (velocity.y < -1.0)
+        {
+            if let t = self.toDoTableView.indexPathsForVisibleRows
+            {
+                for ip in t
+                {
+                    if ip.row == 0
+                    {
+                        print("R:\(ip.row)")
+                    }
+                }
+            }
+        }
+    }
+}
+
 // MARK: UITableViewDelegate
 
 extension ToDoController: UITableViewDelegate
