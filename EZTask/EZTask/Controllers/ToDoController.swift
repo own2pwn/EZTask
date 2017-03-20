@@ -19,9 +19,11 @@ class ToDoController: UIViewController
     
     fileprivate let toDoCellIdentifier = "idToDoCell"
     
-    var openTasks = 7
+    var openTasks = 25
     
     var completedTasks = 0
+    
+    var refreshControl: UIRefreshControl!
     
     fileprivate let sectionsNumber = 2
     
@@ -30,6 +32,12 @@ class ToDoController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
+        refreshControl.frame.origin.y += 100
+        toDoTableView.addSubview(refreshControl)
         
     }
 }
@@ -40,22 +48,29 @@ class ToDoController: UIViewController
 
 extension ToDoController
 {
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
-    {
-        if (velocity.y < -1.0)
-        {
-            if let t = self.toDoTableView.indexPathsForVisibleRows
-            {
-                for ip in t
-                {
-                    if ip.row == 0
-                    {
-                        print("R:\(ip.row)")
-                    }
-                }
-            }
-        }
+    
+    func refresh() {
+        refreshControl.endRefreshing()
+        print("kekes")
     }
+    
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
+//    {
+//        if (velocity.y < -0.3)
+//        {
+//            if let t = self.toDoTableView.indexPathsForVisibleRows
+//            {
+//                for ip in t
+//                {
+//                    if ip.row == 0
+//                    {
+//                        print("R:\(ip.row)")
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
 }
 
 // MARK: UITableViewDelegate
