@@ -31,10 +31,9 @@ class ToDoController: UIViewController
     {
         super.viewDidLoad()
         
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 170))
-        headerView.backgroundColor = UIColor.red
-        
-        self.toDoTableView.tableHeaderView = headerView
+//        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 170))
+//        headerView.backgroundColor = UIColor.red
+//        self.toDoTableView.tableHeaderView = headerView
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = UIColor(red: 78 / 255.0, green: 221 / 255.0, blue: 200 / 255.0, alpha: 1.0)
