@@ -19,7 +19,7 @@ class ToDoController: UIViewController
     
     fileprivate let toDoCellIdentifier = "idToDoCell"
     
-    var openTasks = 25
+    var openTasks = 2
     
     var completedTasks = 0
     
@@ -38,6 +38,16 @@ class ToDoController: UIViewController
         loadingView.tintColor = .yellow
         
         toDoTableView.dg_addPullToRefreshWithActionHandler({ [weak self]() -> Void in
+            
+            self?.openTasks += 1
+            let nPath = IndexPath(row: 0, section: 0)
+            
+            self?.toDoTableView.insertRows(at: [nPath], with: .fade)
+            
+            let newTask = self?.toDoTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ToDoCell
+             newTask.toDoTextField.text = ""
+            newTask.toDoTextField.isUserInteractionEnabled = true
+            newTask.toDoTextField.becomeFirstResponder()
             
             self?.toDoTableView.dg_stopLoading()
         }, loadingView: loadingView)
@@ -105,7 +115,7 @@ extension ToDoController
         }
         
         cell.toDoTextField.text = "mem"
-//        cell.toDoTextField.isUserInteractionEnabled = false
+        cell.toDoTextField.isUserInteractionEnabled = false
         cell.settings.secondTrigger = 0.66
         cell.settings.startImmediately = true
         cell.selectionStyle = .none
