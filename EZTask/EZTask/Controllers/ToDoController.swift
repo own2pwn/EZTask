@@ -31,18 +31,16 @@ class ToDoController: UIViewController
     {
         super.viewDidLoad()
         
-//        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 170))
-//        headerView.backgroundColor = UIColor.red
-//        self.toDoTableView.tableHeaderView = headerView
+        navigationController?.navigationBar.barTintColor = .green
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
-        loadingView.tintColor = UIColor(red: 78 / 255.0, green: 221 / 255.0, blue: 200 / 255.0, alpha: 1.0)
+        loadingView.tintColor = .yellow
+        
         toDoTableView.dg_addPullToRefreshWithActionHandler({ [weak self]() -> Void in
-            // Add your logic here
-            // Do not forget to call dg_stopLoading() at the end
+            
             self?.toDoTableView.dg_stopLoading()
         }, loadingView: loadingView)
-        toDoTableView.dg_setPullToRefreshFillColor(UIColor(red: 57 / 255.0, green: 67 / 255.0, blue: 89 / 255.0, alpha: 1.0))
+        toDoTableView.dg_setPullToRefreshFillColor(.green) // bg color
         toDoTableView.dg_setPullToRefreshBackgroundColor(toDoTableView.backgroundColor!)
     }
     
