@@ -39,8 +39,6 @@ class ToDoController: UIViewController
         
         toDoTableView.dg_addPullToRefreshWithActionHandler({ [weak self]() -> Void in
             
-            print("mem")
-            
             self?.toDoTableView.dg_stopLoading()
         }, loadingView: loadingView)
         toDoTableView.dg_setPullToRefreshFillColor(.green) // bg color
@@ -144,6 +142,7 @@ extension ToDoController
             let nPath = IndexPath(row: 0, section: 1)
             completedTasks += 1
             toDoTableView.insertRows(at: [nPath], with: .fade)
+            toDoTableView.scrollToRow(at: nPath, at: .top, animated: true)
         }
     }
     
@@ -156,7 +155,18 @@ extension ToDoController
             let nPath = IndexPath(row: 0, section: 0)
             openTasks += 1
             toDoTableView.insertRows(at: [nPath], with: .fade)
-            toDoTableView.selectRow(at: nPath, animated: true, scrollPosition: .top)
+            toDoTableView.scrollToRow(at: nPath, at: .top, animated: true)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute:
+            {
+                if let cell = self.toDoTableView.cellForRow(at: IndexPath(row: 0, section: 0))
+                {
+                    if let cell = cell as? ToDoCell
+                    {
+                        cell.toDoTextField.becomeFirstResponder()
+                    }
+                }
+            })
         }
     }
 }
@@ -198,6 +208,12 @@ extension ToDoController: UITableViewDataSource
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        let cell = tableView.cellForRow(at: indexPath) as! ToDoCell
+        cell.toDoTextField.becomeFirstResponder()
     }
 }
 
