@@ -70,7 +70,7 @@ open class DGElasticPullToRefreshView: UIView {
         }
     }
     
-    fileprivate var originalContentInsetTop: CGFloat = 30.0 { didSet { layoutSubviews() } }
+    fileprivate var originalContentInsetTop: CGFloat = 0.0 { didSet { layoutSubviews() } }
     fileprivate let shapeLayer = CAShapeLayer()
     
     fileprivate var displayLink: CADisplayLink!
