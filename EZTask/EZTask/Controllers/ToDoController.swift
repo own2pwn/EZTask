@@ -31,14 +31,19 @@ class ToDoController: UIViewController
     {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.barTintColor = .green
+        navigationController?.navigationBar.clipsToBounds = true
+        
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
-        loadingView.tintColor = UIColor(red: 78 / 255.0, green: 221 / 255.0, blue: 200 / 255.0, alpha: 1.0)
+        loadingView.tintColor = .yellow
+        
         toDoTableView.dg_addPullToRefreshWithActionHandler({ [weak self]() -> Void in
-            // Add your logic here
-            // Do not forget to call dg_stopLoading() at the end
+            
+            print("mem")
+            
             self?.toDoTableView.dg_stopLoading()
         }, loadingView: loadingView)
-        toDoTableView.dg_setPullToRefreshFillColor(UIColor(red: 57 / 255.0, green: 67 / 255.0, blue: 89 / 255.0, alpha: 1.0))
+        toDoTableView.dg_setPullToRefreshFillColor(.green) // bg color
         toDoTableView.dg_setPullToRefreshBackgroundColor(toDoTableView.backgroundColor!)
     }
     
@@ -112,8 +117,8 @@ extension ToDoController
         let clockView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "watchesIcon"))
         let yellowColor = UIColor(red: 254.0 / 255.0, green: 217.0 / 255.0, blue: 56.0 / 255.0, alpha: 1.0)
         
-        let listView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "sticksIconIcon"))
-        let brownColor = UIColor(red: 206.0 / 255.0, green: 149.0 / 255.0, blue: 98.0 / 255.0, alpha: 1.0)
+        _ = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "sticksIconIcon"))
+        _ = UIColor(red: 206.0 / 255.0, green: 149.0 / 255.0, blue: 98.0 / 255.0, alpha: 1.0)
         
         if let bgView = self.toDoTableView.backgroundView
         {
