@@ -60,28 +60,6 @@ class ToDoController: UIViewController
 extension ToDoController
 {
     
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView)
-    {
-        _ = 2
-    }
-    
-    //    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
-    //    {
-    //        if (velocity.y < -0.3)
-    //        {
-    //            if let t = self.toDoTableView.indexPathsForVisibleRows
-    //            {
-    //                for ip in t
-    //                {
-    //                    if ip.row == 0
-    //                    {
-    //                        print("R:\(ip.row)")
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    
 }
 
 // MARK: UITableViewDelegate
@@ -129,7 +107,7 @@ extension ToDoController
         }
         
         cell.toDoTextField.text = "mem"
-        cell.toDoTextField.isUserInteractionEnabled = false
+//        cell.toDoTextField.isUserInteractionEnabled = false
         cell.settings.secondTrigger = 0.66
         cell.settings.startImmediately = true
         cell.selectionStyle = .none
@@ -178,6 +156,7 @@ extension ToDoController
             let nPath = IndexPath(row: 0, section: 0)
             openTasks += 1
             toDoTableView.insertRows(at: [nPath], with: .fade)
+            toDoTableView.selectRow(at: nPath, animated: true, scrollPosition: .top)
         }
     }
 }
@@ -211,10 +190,10 @@ extension ToDoController: UITableViewDataSource
         
         if section == 1
         {
-            let attributeString = NSMutableAttributedString(string: (cell.textLabel?.text)!)
+            let attributeString = NSMutableAttributedString(string: (cell.toDoTextField?.text)!)
             attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributeString.length))
             
-            cell.textLabel?.attributedText = attributeString
+            cell.toDoTextField?.attributedText = attributeString
             cell.backgroundColor = .flatWhite
         }
         
