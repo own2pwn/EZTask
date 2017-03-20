@@ -88,14 +88,23 @@ open class KZSwipeTableViewCell: UITableViewCell
     
     var _activeView: UIView?
     
-    public required override init(style: UITableViewCellStyle, reuseIdentifier: String?)
+    public required init?(coder aDecoder: NSCoder)
     {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(coder: aDecoder)
         
         _panGestureRecognizer.addTarget(self, action: #selector(KZSwipeTableViewCell.handlePanGestureRecognizer(_:)))
         addGestureRecognizer(_panGestureRecognizer)
         _panGestureRecognizer.delegate = self
     }
+    
+//    public required override init(style: UITableViewCellStyle, reuseIdentifier: String?)
+//    {
+//        super.init(style: style, reuseIdentifier: reuseIdentifier)
+//        
+//        _panGestureRecognizer.addTarget(self, action: #selector(KZSwipeTableViewCell.handlePanGestureRecognizer(_:)))
+//        addGestureRecognizer(_panGestureRecognizer)
+//        _panGestureRecognizer.delegate = self
+//    }
     
     // MARK: Init
     
@@ -695,10 +704,5 @@ open class KZSwipeTableViewCell: UITableViewCell
         {
             completionBlock(self, state, mode)
         }
-    }
-    
-    public required init?(coder aDecoder: NSCoder)
-    {
-        fatalError("init(coder:) has not been implemented")
     }
 }

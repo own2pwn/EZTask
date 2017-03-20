@@ -19,9 +19,11 @@ class ToDoController: UIViewController
     
     fileprivate let toDoCellIdentifier = "idToDoCell"
     
-    var openTasks = 25
+    var openTasks = 2
     
     var completedTasks = 0
+    
+    var onViewTapGesture = UITapGestureRecognizer()
     
     fileprivate let sectionsNumber = 2
     
@@ -39,7 +41,15 @@ class ToDoController: UIViewController
         
         toDoTableView.dg_addPullToRefreshWithActionHandler({ [weak self]() -> Void in
             
-            print("mem")
+            self?.openTasks += 1
+            let nPath = IndexPath(row: 0, section: 0)
+            
+            self?.toDoTableView.insertRows(at: [nPath], with: .fade)
+            
+            let newTask = self?.toDoTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ToDoCell
+            newTask.toDoTextField.text = ""
+            newTask.toDoTextField.isUserInteractionEnabled = true
+            newTask.toDoTextField.becomeFirstResponder()
             
             self?.toDoTableView.dg_stopLoading()
         }, loadingView: loadingView)
@@ -55,33 +65,49 @@ class ToDoController: UIViewController
 
 // MARK: - Extensions
 
-// MARK: - Scrolling
+// MARK: - UITextFieldDelegate
 
-extension ToDoController
+extension ToDoController: UITextFieldDelegate
 {
-    
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView)
+    func textFieldDidBeginEditing(_ textField: UITextField)
     {
-        _ = 2
+        onViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onViewTap))
+        view.addGestureRecognizer(onViewTapGesture)
     }
     
-    //    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
-    //    {
-    //        if (velocity.y < -0.3)
-    //        {
-    //            if let t = self.toDoTableView.indexPathsForVisibleRows
-    //            {
-    //                for ip in t
-    //                {
-    //                    if ip.row == 0
-    //                    {
-    //                        print("R:\(ip.row)")
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
+    func onViewTap()
+    {
+        view.resignFirstResponder()
+        view.removeGestureRecognizer(onViewTapGesture)
+    }
     
+    func textFieldDidEndEditing(_ textField: UITextField)
+    {
+        textField.isUserInteractionEnabled = false
+        
+        let nPath = IndexPath(row: 0, section: 0)
+        
+        if let text = textField.text
+        {
+            if text.isEmpty || text == " "
+            {
+                openTasks -= 1
+                toDoTableView.deleteRows(at: [nPath], with: .fade)
+            }
+        }
+        else
+        {
+            openTasks -= 1
+            toDoTableView.deleteRows(at: [nPath], with: .fade)
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        
+        return true
+    }
 }
 
 // MARK: UITableViewDelegate
@@ -109,7 +135,7 @@ extension ToDoController: UITableViewDelegate
 
 extension ToDoController
 {
-    func configureCell(_ cell: KZSwipeTableViewCell, indexPath: IndexPath)
+    func configureCell(_ cell: ToDoCell, indexPath: IndexPath)
     {
         let checkView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "checkMarkIcon"))
         let greenColor = UIColor(red: 85.0 / 255.0, green: 213.0 / 255.0, blue: 80.0 / 255.0, alpha: 1.0)
@@ -128,8 +154,8 @@ extension ToDoController
             }
         }
         
-        cell.textLabel?.text = "Task"
-        cell.detailTextLabel?.text = "Subtitle"
+        cell.toDoTextField.text = "mem"
+        cell.toDoTextField.isUserInteractionEnabled = false
         cell.settings.secondTrigger = 0.66
         cell.settings.startImmediately = true
         cell.selectionStyle = .none
@@ -166,6 +192,7 @@ extension ToDoController
             let nPath = IndexPath(row: 0, section: 1)
             completedTasks += 1
             toDoTableView.insertRows(at: [nPath], with: .fade)
+            toDoTableView.scrollToRow(at: nPath, at: .top, animated: true)
         }
     }
     
@@ -178,6 +205,18 @@ extension ToDoController
             let nPath = IndexPath(row: 0, section: 0)
             openTasks += 1
             toDoTableView.insertRows(at: [nPath], with: .fade)
+            toDoTableView.scrollToRow(at: nPath, at: .top, animated: true)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute:
+                {
+                    if let cell = self.toDoTableView.cellForRow(at: IndexPath(row: 0, section: 0))
+                    {
+                        if let cell = cell as? ToDoCell
+                        {
+                            cell.toDoTextField.becomeFirstResponder()
+                        }
+                    }
+            })
         }
     }
 }
@@ -203,7 +242,7 @@ extension ToDoController: UITableViewDataSource
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = KZSwipeTableViewCell(style: .subtitle, reuseIdentifier: toDoCellIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "idToDoCell") as! ToDoCell
         
         configureCell(cell, indexPath: indexPath)
         
@@ -211,14 +250,20 @@ extension ToDoController: UITableViewDataSource
         
         if section == 1
         {
-            let attributeString = NSMutableAttributedString(string: (cell.textLabel?.text)!)
+            let attributeString = NSMutableAttributedString(string: (cell.toDoTextField?.text)!)
             attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributeString.length))
             
-            cell.textLabel?.attributedText = attributeString
+            cell.toDoTextField?.attributedText = attributeString
             cell.backgroundColor = .flatWhite
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        let cell = tableView.cellForRow(at: indexPath) as! ToDoCell
+        cell.toDoTextField.becomeFirstResponder()
     }
 }
 
