@@ -23,6 +23,8 @@ class ToDoController: UIViewController
     
     var completedTasks = 0
     
+    var onViewTapGesture = UITapGestureRecognizer()
+    
     fileprivate let sectionsNumber = 2
     
     // MARK: - Life cycle
@@ -45,7 +47,7 @@ class ToDoController: UIViewController
             self?.toDoTableView.insertRows(at: [nPath], with: .fade)
             
             let newTask = self?.toDoTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ToDoCell
-             newTask.toDoTextField.text = ""
+            newTask.toDoTextField.text = ""
             newTask.toDoTextField.isUserInteractionEnabled = true
             newTask.toDoTextField.becomeFirstResponder()
             
@@ -63,11 +65,49 @@ class ToDoController: UIViewController
 
 // MARK: - Extensions
 
-// MARK: - Scrolling
+// MARK: - UITextFieldDelegate
 
-extension ToDoController
+extension ToDoController: UITextFieldDelegate
 {
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    {
+        onViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onViewTap))
+        view.addGestureRecognizer(onViewTapGesture)
+    }
     
+    func onViewTap()
+    {
+        view.resignFirstResponder()
+        view.removeGestureRecognizer(onViewTapGesture)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField)
+    {
+        textField.isUserInteractionEnabled = false
+        
+        let nPath = IndexPath(row: 0, section: 0)
+        
+        if let text = textField.text
+        {
+            if text.isEmpty || text == " "
+            {
+                openTasks -= 1
+                toDoTableView.deleteRows(at: [nPath], with: .fade)
+            }
+        }
+        else
+        {
+            openTasks -= 1
+            toDoTableView.deleteRows(at: [nPath], with: .fade)
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        
+        return true
+    }
 }
 
 // MARK: UITableViewDelegate
@@ -168,14 +208,14 @@ extension ToDoController
             toDoTableView.scrollToRow(at: nPath, at: .top, animated: true)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute:
-            {
-                if let cell = self.toDoTableView.cellForRow(at: IndexPath(row: 0, section: 0))
                 {
-                    if let cell = cell as? ToDoCell
+                    if let cell = self.toDoTableView.cellForRow(at: IndexPath(row: 0, section: 0))
                     {
-                        cell.toDoTextField.becomeFirstResponder()
+                        if let cell = cell as? ToDoCell
+                        {
+                            cell.toDoTextField.becomeFirstResponder()
+                        }
                     }
-                }
             })
         }
     }
