@@ -18,6 +18,7 @@
 		4CE85D781E8058CB00708D84 /* DGElasticPullToRefreshLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE85D731E8058CB00708D84 /* DGElasticPullToRefreshLoadingView.swift */; };
 		4CE85D791E8058CB00708D84 /* DGElasticPullToRefreshLoadingViewCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE85D741E8058CB00708D84 /* DGElasticPullToRefreshLoadingViewCircle.swift */; };
 		4CE85D7A1E8058CB00708D84 /* DGElasticPullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE85D751E8058CB00708D84 /* DGElasticPullToRefreshView.swift */; };
+		4CE85D7C1E80624500708D84 /* ToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE85D7B1E80624500708D84 /* ToDoCell.swift */; };
 		8FD705EE4F808657E756F35E /* Pods_EZTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3222A67AC8F89353FEC486 /* Pods_EZTask.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		4CE85D731E8058CB00708D84 /* DGElasticPullToRefreshLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGElasticPullToRefreshLoadingView.swift; sourceTree = "<group>"; };
 		4CE85D741E8058CB00708D84 /* DGElasticPullToRefreshLoadingViewCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGElasticPullToRefreshLoadingViewCircle.swift; sourceTree = "<group>"; };
 		4CE85D751E8058CB00708D84 /* DGElasticPullToRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGElasticPullToRefreshView.swift; sourceTree = "<group>"; };
+		4CE85D7B1E80624500708D84 /* ToDoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoCell.swift; sourceTree = "<group>"; };
 		FD3222A67AC8F89353FEC486 /* Pods_EZTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -95,11 +97,11 @@
 			isa = PBXGroup;
 			children = (
 				4CB5A3911E7EA98E002DA155 /* Controllers */,
+				4CB5A3921E7EA9CA002DA155 /* View */,
 				4CB5A3951E7EA9DE002DA155 /* GUI */,
 				4CB5A3941E7EA9D7002DA155 /* Helpers */,
 				4CB5A3931E7EA9D0002DA155 /* Model */,
 				4CB5A3961E7EA9E6002DA155 /* Other */,
-				4CB5A3921E7EA9CA002DA155 /* View */,
 			);
 			path = EZTask;
 			sourceTree = "<group>";
@@ -116,6 +118,7 @@
 		4CB5A3921E7EA9CA002DA155 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4CE85D7B1E80624500708D84 /* ToDoCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				4C0E8C321E7E9D47005A3C19 /* AppDelegate.swift in Sources */,
 				4CE85D791E8058CB00708D84 /* DGElasticPullToRefreshLoadingViewCircle.swift in Sources */,
 				4C1BFCB71E7EB034000A2282 /* KZSwipeTableViewCell.swift in Sources */,
+				4CE85D7C1E80624500708D84 /* ToDoCell.swift in Sources */,
 				4CE85D771E8058CB00708D84 /* DGElasticPullToRefreshExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

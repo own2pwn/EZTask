@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="idToDoCell" textLabel="WPz-U7-G6P" style="IBUITableViewCellStyleDefault" id="YCU-LM-0Qy">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="idToDoCell" textLabel="WPz-U7-G6P" style="IBUITableViewCellStyleDefault" id="YCU-LM-0Qy" customClass="ToDoCell" customModule="EZTask" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YCU-LM-0Qy" id="zRf-H4-Du7">
