@@ -23,8 +23,6 @@ class ToDoController: UIViewController
     
     var completedTasks = 0
     
-    var refreshControl: UIRefreshControl!
-    
     fileprivate let sectionsNumber = 2
     
     // MARK: - Life cycle
@@ -33,43 +31,51 @@ class ToDoController: UIViewController
     {
         super.viewDidLoad()
         
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
-        refreshControl.frame.origin.y += 100
-        toDoTableView.addSubview(refreshControl)
-        
+        let loadingView = DGElasticPullToRefreshLoadingViewCircle()
+        loadingView.tintColor = UIColor(red: 78 / 255.0, green: 221 / 255.0, blue: 200 / 255.0, alpha: 1.0)
+        toDoTableView.dg_addPullToRefreshWithActionHandler({ [weak self]() -> Void in
+            // Add your logic here
+            // Do not forget to call dg_stopLoading() at the end
+            self?.toDoTableView.dg_stopLoading()
+        }, loadingView: loadingView)
+        toDoTableView.dg_setPullToRefreshFillColor(UIColor(red: 57 / 255.0, green: 67 / 255.0, blue: 89 / 255.0, alpha: 1.0))
+        toDoTableView.dg_setPullToRefreshBackgroundColor(toDoTableView.backgroundColor!)
+    }
+    
+    deinit
+    {
+        toDoTableView.dg_removePullToRefresh()
     }
 }
 
 // MARK: - Extensions
 
-// MARK: - Scrolling 
+// MARK: - Scrolling
 
 extension ToDoController
 {
     
-    func refresh() {
-        refreshControl.endRefreshing()
-        print("kekes")
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView)
+    {
+        _ = 2
     }
     
-//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
-//    {
-//        if (velocity.y < -0.3)
-//        {
-//            if let t = self.toDoTableView.indexPathsForVisibleRows
-//            {
-//                for ip in t
-//                {
-//                    if ip.row == 0
-//                    {
-//                        print("R:\(ip.row)")
-//                    }
-//                }
-//            }
-//        }
-//    }
+    //    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
+    //    {
+    //        if (velocity.y < -0.3)
+    //        {
+    //            if let t = self.toDoTableView.indexPathsForVisibleRows
+    //            {
+    //                for ip in t
+    //                {
+    //                    if ip.row == 0
+    //                    {
+    //                        print("R:\(ip.row)")
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
 }
 
@@ -84,7 +90,7 @@ extension ToDoController: UITableViewDelegate
             print("More")
         }
         timer.backgroundColor = .yellow
-
+        
         let del = UITableViewRowAction(style: .default, title: "\u{274C}")
         { action, index in
             print("delete")
@@ -102,7 +108,6 @@ extension ToDoController
     {
         let checkView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "checkMarkIcon"))
         let greenColor = UIColor(red: 85.0 / 255.0, green: 213.0 / 255.0, blue: 80.0 / 255.0, alpha: 1.0)
-        
         
         let clockView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "watchesIcon"))
         let yellowColor = UIColor(red: 254.0 / 255.0, green: 217.0 / 255.0, blue: 56.0 / 255.0, alpha: 1.0)
@@ -131,7 +136,7 @@ extension ToDoController
         cell.setSwipeGestureWith(checkView, color: greenColor, mode: .exit, state: .state1, completionBlock: { (cell, state, mode) -> Void in
             print("Marked task as done")
             
-            if (indexPath.section == 0)
+            if indexPath.section == 0
             {
                 self.markTaskCompleted(cell)
             }
@@ -144,7 +149,6 @@ extension ToDoController
         cell.setSwipeGestureWith(clockView, color: yellowColor, mode: .none, state: .state3, completionBlock: { (cell, state, mode) -> Void in
             print("Snoozing task")
         })
-        
         
     }
     
