@@ -109,7 +109,7 @@ extension ToDoController: UITableViewDelegate
 
 extension ToDoController
 {
-    func configureCell(_ cell: KZSwipeTableViewCell, indexPath: IndexPath)
+    func configureCell(_ cell: ToDoCell, indexPath: IndexPath)
     {
         let checkView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "checkMarkIcon"))
         let greenColor = UIColor(red: 85.0 / 255.0, green: 213.0 / 255.0, blue: 80.0 / 255.0, alpha: 1.0)
@@ -129,6 +129,7 @@ extension ToDoController
         }
         
         cell.textLabel?.text = "Task"
+        cell.toDoLabel.text = "mem"
         cell.detailTextLabel?.text = "Subtitle"
         cell.settings.secondTrigger = 0.66
         cell.settings.startImmediately = true
@@ -203,7 +204,7 @@ extension ToDoController: UITableViewDataSource
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = KZSwipeTableViewCell(style: .subtitle, reuseIdentifier: toDoCellIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "idToDoCell") as! ToDoCell
         
         configureCell(cell, indexPath: indexPath)
         
