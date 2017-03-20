@@ -32,9 +32,7 @@ class ToDoController: UIViewController
         super.viewDidLoad()
         
         navigationController?.navigationBar.barTintColor = .green
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.clipsToBounds = true
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = .yellow
