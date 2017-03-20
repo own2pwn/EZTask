@@ -39,6 +39,8 @@ class ToDoController: UIViewController
         
         toDoTableView.dg_addPullToRefreshWithActionHandler({ [weak self]() -> Void in
             
+            print("mem")
+            
             self?.toDoTableView.dg_stopLoading()
         }, loadingView: loadingView)
         toDoTableView.dg_setPullToRefreshFillColor(.green) // bg color
