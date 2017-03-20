@@ -128,9 +128,8 @@ extension ToDoController
             }
         }
         
-        cell.textLabel?.text = "Task"
-        cell.toDoLabel.text = "mem"
-        cell.detailTextLabel?.text = "Subtitle"
+        cell.toDoTextField.text = "mem"
+        cell.toDoTextField.isUserInteractionEnabled = false
         cell.settings.secondTrigger = 0.66
         cell.settings.startImmediately = true
         cell.selectionStyle = .none

@@ -10,6 +10,6 @@ import UIKit
 
 class ToDoCell: KZSwipeTableViewCell
 {
-    @IBOutlet weak var toDoLabel: UILabel!
+    @IBOutlet weak var toDoTextField: UITextField!
     
 }
