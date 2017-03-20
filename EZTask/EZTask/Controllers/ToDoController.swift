@@ -32,19 +32,6 @@ class ToDoController: UIViewController
         super.viewDidLoad()
         
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(addTask))
-        swipeUpGesture.direction = .up
-        self.toDoTableView.addGestureRecognizer(swipeUpGesture)
-    }
-    
-    func addTask(_ gesture: UISwipeGestureRecognizer) {
-        if (gesture.direction == .up) {
-            print("ok")
-        }
-    }
-    
 }
 
 // MARK: - Extensions
