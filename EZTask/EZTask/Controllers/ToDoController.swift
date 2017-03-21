@@ -77,7 +77,10 @@ extension ToDoController: UITextFieldDelegate
     
     func onViewTap()
     {
-        view.resignFirstResponder()
+        let nPath = IndexPath(row: 0, section: 0)
+        let editingCell = toDoTableView.cellForRow(at: nPath) as! ToDoCell
+        editingCell.toDoTextField.resignFirstResponder()
+        
         view.removeGestureRecognizer(onViewTapGesture)
     }
     
