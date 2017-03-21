@@ -43,12 +43,6 @@ class ToDoController: UIViewController
     
     // MARK: - View setup
     
-    func retrieveTasks()
-    {
-        openTasks = uiRealm.objects(ToDoTaskModel).filter("isCompleted = false")
-        completedTasks = uiRealm.objects(ToDoTaskModel).filter("isCompleted = true")
-    }
-    
     func setupNavigationController()
     {
         navigationController?.navigationBar.barTintColor = .appMainGreenColor
@@ -231,34 +225,39 @@ extension ToDoController
     
     func markTaskCompleted(_ cell: KZSwipeTableViewCell)
     {
-        //        openTasks -= 1
-        
         if let indexPath = toDoTableView.indexPath(for: cell)
         {
             let task = openTasks[indexPath.row]
             
-            try! uiRealm.write { task.isCompleted = true }
+            try! uiRealm.write
+            {
+                task.isCompleted = true
+            }
             
-            toDoTableView.deleteRows(at: [indexPath], with: .fade)
             let nPath = IndexPath(row: 0, section: 1)
-            //            completedTasks += 1
-            toDoTableView.insertRows(at: [nPath], with: .fade)
+            
+            toDoTableView.moveRow(at: indexPath, to: nPath)
+            toDoTableView.reloadRows(at: [nPath], with: .fade)
+            
             toDoTableView.scrollToRow(at: nPath, at: .top, animated: true)
         }
     }
     
     func unmarkTaskCompleted(_ cell: KZSwipeTableViewCell)
     {
-        //        completedTasks -= 1
         if let indexPath = toDoTableView.indexPath(for: cell)
         {
-            let task = openTasks[indexPath.row]
-            try! uiRealm.write { task.isCompleted = false }
+            let task = completedTasks[indexPath.row]
+            try! uiRealm.write
+            {
+                task.isCompleted = false
+            }
             
-            toDoTableView.deleteRows(at: [indexPath], with: .fade)
             let nPath = IndexPath(row: 0, section: 0)
-            //            openTasks += 1
-            toDoTableView.insertRows(at: [nPath], with: .fade)
+            
+            toDoTableView.moveRow(at: indexPath, to: nPath)
+            toDoTableView.reloadRows(at: [nPath], with: .fade)
+            
             toDoTableView.scrollToRow(at: nPath, at: .top, animated: true)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute:
@@ -278,16 +277,23 @@ extension ToDoController
 
 extension ToDoController: UITableViewDataSource
 {
+    func retrieveTasks()
+    {
+        openTasks = uiRealm.objects(ToDoTaskModel).filter("isCompleted = false")
+        completedTasks = uiRealm.objects(ToDoTaskModel).filter("isCompleted = true")
+    }
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        // TODO: change
-        
         if section == 0
         {
             return openTasks.count
         }
         
-        return completedTasks.count
+        else
+        {
+            return completedTasks.count
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int
