@@ -236,7 +236,8 @@ extension ToDoController
         if let indexPath = toDoTableView.indexPath(for: cell)
         {
             let task = openTasks[indexPath.row]
-            task.isCompleted = true
+            
+            try! uiRealm.write { task.isCompleted = true }
             
             toDoTableView.deleteRows(at: [indexPath], with: .fade)
             let nPath = IndexPath(row: 0, section: 1)
@@ -252,7 +253,7 @@ extension ToDoController
         if let indexPath = toDoTableView.indexPath(for: cell)
         {
             let task = openTasks[indexPath.row]
-            task.isCompleted = false
+            try! uiRealm.write { task.isCompleted = false }
             
             toDoTableView.deleteRows(at: [indexPath], with: .fade)
             let nPath = IndexPath(row: 0, section: 0)
