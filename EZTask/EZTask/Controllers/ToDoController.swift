@@ -7,7 +7,10 @@
 //
 
 import UIKit
+import RealmSwift
 import Chameleon
+
+fileprivate let toDoCellIdentifier = "idToDoCell"
 
 class ToDoController: UIViewController
 {
@@ -17,52 +20,75 @@ class ToDoController: UIViewController
     
     // MARK: - Properties
     
-    fileprivate let toDoCellIdentifier = "idToDoCell"
+    let uiRealm = try! Realm()
     
-    var openTasks = 2
+    var openTasks: Results<ToDoTaskModel>!
     
-    var completedTasks = 0
+    var completedTasks: Results<ToDoTaskModel>!
     
     var onViewTapGesture = UITapGestureRecognizer()
     
     fileprivate let sectionsNumber = 2
     
-    let greenColor = UIColor(red: 85.0 / 255.0, green: 213.0 / 255.0, blue: 80.0 / 255.0, alpha: 1.0)
-    
     // MARK: - Life cycle
     
     override func viewDidLoad()
     {
-        super.viewDidLoad();
-        navigationController?.navigationBar.barTintColor = greenColor
-        navigationController?.navigationBar.tintColor = greenColor
+        super.viewDidLoad()
+        
+        retrieveTasks()
+        setupNavigationController()
+        setupRefreshController()
+    }
+    
+    // MARK: - View setup
+    
+    func retrieveTasks()
+    {
+        openTasks = uiRealm.objects(ToDoTaskModel).filter("isCompleted = false")
+        completedTasks = uiRealm.objects(ToDoTaskModel).filter("isCompleted = true")
+    }
+    
+    func setupNavigationController()
+    {
+        navigationController?.navigationBar.barTintColor = .appMainGreenColor
+        navigationController?.navigationBar.tintColor = .appMainGreenColor
         navigationController?.navigationBar.isTranslucent = false
-        //navigationController?.navigationBar.backgroundColor = greenColor
         navigationController?.navigationBar.clipsToBounds = true
-        self.navigationItem.title = "To-Do List";
-        //self.navigationItem.
-        //self.navigationItem.titleView?.frame.origin.y -= 50;
+        navigationItem.title = "To-Do List"
+    }
+    
+    func setupRefreshController()
+    {
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = .yellow
         
         toDoTableView.dg_addPullToRefreshWithActionHandler({ [weak self]() -> Void in
             
-            self?.openTasks += 1
-            let nPath = IndexPath(row: 0, section: 0)
+            try! self?.uiRealm.write
+            {
+                self?.uiRealm.add(ToDoTaskModel())
+            }
             
+            //            self?.openTasks += 1
+            
+            let nPath = IndexPath(row: 0, section: 0)
             self?.toDoTableView.insertRows(at: [nPath], with: .fade)
             
             let newTask = self?.toDoTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ToDoCell
+            
             newTask.toDoTextField.text = ""
-            //newTask.toDoTextField.textColor = .flatWhite
             newTask.toDoTextField.isUserInteractionEnabled = true
             newTask.toDoTextField.becomeFirstResponder()
             
             self?.toDoTableView.dg_stopLoading()
         }, loadingView: loadingView)
-        toDoTableView.dg_setPullToRefreshFillColor(greenColor) // bg color
+        
+        toDoTableView.dg_setPullToRefreshFillColor(.appMainGreenColor) // bg color
         toDoTableView.dg_setPullToRefreshBackgroundColor(toDoTableView.backgroundColor!)
     }
+    
+    // MARK: - deinit
     
     deinit
     {
@@ -101,13 +127,23 @@ extension ToDoController: UITextFieldDelegate
         {
             if text.isEmpty || text == " "
             {
-                openTasks -= 1
+                //                openTasks -= 1
+                
+                try! uiRealm.write
+                {
+                    uiRealm.delete(uiRealm.objects(ToDoTaskModel).last!)
+                }
+                
                 toDoTableView.deleteRows(at: [nPath], with: .fade)
             }
         }
         else
         {
-            openTasks -= 1
+            //            openTasks -= 1
+            try! uiRealm.write
+            {
+                uiRealm.delete(uiRealm.objects(ToDoTaskModel).last!)
+            }
             toDoTableView.deleteRows(at: [nPath], with: .fade)
         }
     }
@@ -130,7 +166,7 @@ extension ToDoController: UITableViewDelegate
         { action, index in
             print("More")
         }
-        timer.backgroundColor = .flatYellow;
+        timer.backgroundColor = .flatYellow
         
         let del = UITableViewRowAction(style: .default, title: "Удалить")
         { action, index in
@@ -165,7 +201,6 @@ extension ToDoController
         }
         
         cell.toDoTextField.text = "mem"
-        //cell.toDoTextField.textColor = .flatWhite
         cell.toDoTextField.isUserInteractionEnabled = false
         cell.settings.secondTrigger = 0.66
         cell.settings.startImmediately = true
@@ -196,12 +231,16 @@ extension ToDoController
     
     func markTaskCompleted(_ cell: KZSwipeTableViewCell)
     {
-        openTasks -= 1
+        //        openTasks -= 1
+        
         if let indexPath = toDoTableView.indexPath(for: cell)
         {
+            let task = openTasks[indexPath.row]
+            task.isCompleted = true
+            
             toDoTableView.deleteRows(at: [indexPath], with: .fade)
             let nPath = IndexPath(row: 0, section: 1)
-            completedTasks += 1
+            //            completedTasks += 1
             toDoTableView.insertRows(at: [nPath], with: .fade)
             toDoTableView.scrollToRow(at: nPath, at: .top, animated: true)
         }
@@ -209,12 +248,15 @@ extension ToDoController
     
     func unmarkTaskCompleted(_ cell: KZSwipeTableViewCell)
     {
-        completedTasks -= 1
+        //        completedTasks -= 1
         if let indexPath = toDoTableView.indexPath(for: cell)
         {
+            let task = openTasks[indexPath.row]
+            task.isCompleted = false
+            
             toDoTableView.deleteRows(at: [indexPath], with: .fade)
             let nPath = IndexPath(row: 0, section: 0)
-            openTasks += 1
+            //            openTasks += 1
             toDoTableView.insertRows(at: [nPath], with: .fade)
             toDoTableView.scrollToRow(at: nPath, at: .top, animated: true)
             
@@ -241,10 +283,10 @@ extension ToDoController: UITableViewDataSource
         
         if section == 0
         {
-            return openTasks
+            return openTasks.count
         }
         
-        return completedTasks
+        return completedTasks.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int
