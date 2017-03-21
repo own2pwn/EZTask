@@ -139,8 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				4CE85D701E8058CB00708D84 /* DGElasticPullToRefresh */,
-				4C1BFCB61E7EB034000A2282 /* KZSwipeTableViewCell.swift */,
 				4C32587D1E81C0C200922D40 /* Extensions.swift */,
+				4C1BFCB61E7EB034000A2282 /* KZSwipeTableViewCell.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
