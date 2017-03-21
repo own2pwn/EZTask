@@ -27,15 +27,21 @@ class ToDoController: UIViewController
     
     fileprivate let sectionsNumber = 2
     
+    let greenColor = UIColor(red: 85.0 / 255.0, green: 213.0 / 255.0, blue: 80.0 / 255.0, alpha: 1.0)
+    
     // MARK: - Life cycle
     
     override func viewDidLoad()
     {
-        super.viewDidLoad()
-        
-        navigationController?.navigationBar.barTintColor = .green
+        super.viewDidLoad();
+        navigationController?.navigationBar.barTintColor = greenColor
+        navigationController?.navigationBar.tintColor = greenColor
+        navigationController?.navigationBar.isTranslucent = false
+        //navigationController?.navigationBar.backgroundColor = greenColor
         navigationController?.navigationBar.clipsToBounds = true
-        
+        self.navigationItem.title = "To-Do List";
+        //self.navigationItem.
+        //self.navigationItem.titleView?.frame.origin.y -= 50;
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = .yellow
         
@@ -48,12 +54,13 @@ class ToDoController: UIViewController
             
             let newTask = self?.toDoTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ToDoCell
             newTask.toDoTextField.text = ""
+            //newTask.toDoTextField.textColor = .flatWhite
             newTask.toDoTextField.isUserInteractionEnabled = true
             newTask.toDoTextField.becomeFirstResponder()
             
             self?.toDoTableView.dg_stopLoading()
         }, loadingView: loadingView)
-        toDoTableView.dg_setPullToRefreshFillColor(.green) // bg color
+        toDoTableView.dg_setPullToRefreshFillColor(greenColor) // bg color
         toDoTableView.dg_setPullToRefreshBackgroundColor(toDoTableView.backgroundColor!)
     }
     
@@ -119,13 +126,13 @@ extension ToDoController: UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
     {
-        let timer = UITableViewRowAction(style: .normal, title: "\u{231A}")
+        let timer = UITableViewRowAction(style: .normal, title: "Напомнить")
         { action, index in
             print("More")
         }
-        timer.backgroundColor = .yellow
+        timer.backgroundColor = .flatYellow;
         
-        let del = UITableViewRowAction(style: .default, title: "\u{274C}")
+        let del = UITableViewRowAction(style: .default, title: "Удалить")
         { action, index in
             print("delete")
         }
@@ -158,6 +165,7 @@ extension ToDoController
         }
         
         cell.toDoTextField.text = "mem"
+        //cell.toDoTextField.textColor = .flatWhite
         cell.toDoTextField.isUserInteractionEnabled = false
         cell.settings.secondTrigger = 0.66
         cell.settings.startImmediately = true
@@ -217,6 +225,7 @@ extension ToDoController
                         if let cell = cell as? ToDoCell
                         {
                             cell.toDoTextField.becomeFirstResponder()
+                            cell.backgroundColor = .white
                         }
                     }
             })
@@ -250,7 +259,7 @@ extension ToDoController: UITableViewDataSource
         configureCell(cell, indexPath: indexPath)
         
         let section = indexPath.section
-        
+        cell.backgroundColor = .white
         if section == 1
         {
             let attributeString = NSMutableAttributedString(string: (cell.toDoTextField?.text)!)
