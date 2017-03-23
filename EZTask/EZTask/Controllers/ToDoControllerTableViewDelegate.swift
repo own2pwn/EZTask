@@ -29,6 +29,7 @@ class ToDoControllerTableViewDelegate: NSObject, UITableViewDelegate
         self.delegate = delegate
         self.textFieldDelegate = textFieldDelegate
         self.toDoTableView = delegate?.toDoTableView
+        self.toDoTableView.dataSource = delegate?.tableViewDataSource
     }
     
     deinit
