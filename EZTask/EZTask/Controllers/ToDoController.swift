@@ -20,9 +20,11 @@ class ToDoController: UIViewController
     
     // MARK: - Properties
     
-    // MARK: Delegates
+    // MARK: Delegate
     
-    weak var textFieldDelegate: ToDoControllerTextFieldDelegate!
+    var textFieldDelegate: ToDoControllerTextFieldDelegate?
+    
+    var tableViewDelegate: ToDoControllerTableViewDelegate?
     
     // MARK: Variables
     
@@ -44,6 +46,7 @@ class ToDoController: UIViewController
     {
         super.viewDidLoad()
         
+        setupDelegates()
         retrieveTasks()
         setupNavigationController()
         setupRefreshController()
@@ -53,7 +56,10 @@ class ToDoController: UIViewController
     
     func setupDelegates()
     {
-        textFieldDelegate = ToDoControllerTextFieldDelegate()
+        textFieldDelegate = ToDoControllerTextFieldDelegate(self)
+        
+        tableViewDelegate = ToDoControllerTableViewDelegate(self, textFieldDelegate: textFieldDelegate)
+        self.toDoTableView.delegate = tableViewDelegate
     }
     
     // MARK: - View setup
@@ -106,106 +112,6 @@ class ToDoController: UIViewController
 }
 
 // MARK: - Extensions
-
-// MARK: - UITextFieldDelegate
-
-extension ToDoController: UITextFieldDelegate
-{
-    func textFieldDidBeginEditing(_ textField: UITextField)
-    {
-        onViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onViewTap))
-        view.addGestureRecognizer(onViewTapGesture)
-    }
-    
-    func onViewTap()
-    {
-        let nPath = IndexPath(row: 0, section: 0)
-        let editingCell = toDoTableView.cellForRow(at: nPath) as! ToDoCell
-        editingCell.toDoTextField.resignFirstResponder()
-        
-        view.removeGestureRecognizer(onViewTapGesture)
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField)
-    {
-        textField.isUserInteractionEnabled = false
-        
-        let nPath = IndexPath(row: 0, section: 0)
-        
-        if let text = textField.text
-        {
-            if text.isEmpty || text == " "
-            {
-                openTasks.removeLast()
-                
-                toDoTableView.deleteRows(at: [nPath], with: .fade)
-            }
-            else
-            {
-                try! uiRealm.write
-                {
-                    let lastOpenTask = openTasks.last
-                    lastOpenTask?.title = textField.text ?? ""
-                }
-            }
-        }
-        else
-        {
-            openTasks.removeLast()
-            toDoTableView.deleteRows(at: [nPath], with: .fade)
-        }
-        
-        openTasks = openTasks.reversed()
-        updateTasks()
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
-        textField.resignFirstResponder()
-        
-        return true
-    }
-}
-
-// MARK: UITableViewDelegate
-
-extension ToDoController: UITableViewDelegate
-{
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
-    {
-        if let cell = cell as? ToDoCell
-        {
-            cell.toDoTextField.delegate = textFieldDelegate
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
-    {
-        let timer = UITableViewRowAction(style: .normal, title: "Напомнить")
-        { action, index in
-        }
-        timer.backgroundColor = .flatYellow
-        
-        let del = UITableViewRowAction(style: .destructive, title: "Удалить")
-        { action, index in
-            
-            let section = indexPath.section
-            if section == 0
-            {
-                self.openTasks.remove(at: indexPath.row)
-            }
-            else
-            {
-                self.completedTasks.remove(at: indexPath.row)
-            }
-            self.toDoTableView.deleteRows(at: [indexPath], with: .fade)
-        }
-        del.backgroundColor = .red
-        return [del, timer]
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return true }
-}
 
 extension ToDoController
 {

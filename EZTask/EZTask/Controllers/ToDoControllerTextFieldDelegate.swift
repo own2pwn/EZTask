@@ -8,60 +8,79 @@
 
 import UIKit
 
-class ToDoControllerTextFieldDelegate: UITextFieldDelegate
+class ToDoControllerTextFieldDelegate: NSObject, UITextFieldDelegate
 {
-    public func `self`() -> Self {
-        <#code#>
+    // MARK: - Properties
+    
+    // MARK: Delegate
+    
+    weak var delegate: ToDoController?
+    
+    // MARK: Variables
+    
+    var onViewTapGesture: UITapGestureRecognizer!
+    
+    // MARK: - Initialization
+    
+    convenience init(_ delegate: ToDoController?)
+    {
+        self.init()
+        
+        self.delegate = delegate
     }
-
+    
+    // MARK: - UITextFieldDelegate & Logic
+    
     func textFieldDidBeginEditing(_ textField: UITextField)
     {
-        print("didbegin")
-        
-        //        onViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onViewTap))
-        //        view.addGestureRecognizer(onViewTapGesture)
+        onViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onViewTap))
+        delegate?.view.addGestureRecognizer(onViewTapGesture)
     }
     
     func onViewTap()
     {
-        //        let nPath = IndexPath(row: 0, section: 0)
-        //        let editingCell = toDoTableView.cellForRow(at: nPath) as! ToDoCell
-        //        editingCell.toDoTextField.resignFirstResponder()
-        //
-        //        view.removeGestureRecognizer(onViewTapGesture)
+        let nPath = IndexPath(row: 0, section: 0)
+        
+        if let editingCell = delegate?.toDoTableView.cellForRow(at: nPath) as? ToDoCell
+        {
+            editingCell.toDoTextField.resignFirstResponder()
+        }
+        
+        delegate?.view.removeGestureRecognizer(onViewTapGesture)
+        onViewTapGesture = nil
     }
     
     func textFieldDidEndEditing(_ textField: UITextField)
     {
-        //        textField.isUserInteractionEnabled = false
-        //
-        //        let nPath = IndexPath(row: 0, section: 0)
-        //
-        //        if let text = textField.text
-        //        {
-        //            if text.isEmpty || text == " "
-        //            {
-        //                openTasks.removeLast()
-        //
-        //                toDoTableView.deleteRows(at: [nPath], with: .fade)
-        //            }
-        //            else
-        //            {
-        //                try! uiRealm.write
-        //                    {
-        //                        let lastOpenTask = openTasks.last
-        //                        lastOpenTask?.title = textField.text ?? ""
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            openTasks.removeLast()
-        //            toDoTableView.deleteRows(at: [nPath], with: .fade)
-        //        }
-        //
-        //        openTasks = openTasks.reversed()
-        //        updateTasks()
+        textField.isUserInteractionEnabled = false
+        
+        let nPath = IndexPath(row: 0, section: 0)
+        
+        if let text = textField.text
+        {
+            if text.isEmpty || text == " "
+            {
+                delegate?.openTasks.removeLast()
+                
+                delegate?.toDoTableView.deleteRows(at: [nPath], with: .fade)
+            }
+            else
+            {
+                try! delegate?.uiRealm.write
+                {
+                    let lastOpenTask = delegate?.openTasks.last
+                    lastOpenTask?.title = textField.text ?? ""
+                }
+            }
+        }
+        else
+        {
+            delegate?.openTasks.removeLast()
+            delegate?.toDoTableView.deleteRows(at: [nPath], with: .fade)
+        }
+        
+        delegate?.openTasks = (delegate?.openTasks.reversed())!
+        delegate?.updateTasks()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
