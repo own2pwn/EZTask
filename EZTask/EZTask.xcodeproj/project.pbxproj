@@ -13,6 +13,8 @@
 		4C0E8C391E7E9D47005A3C19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C0E8C381E7E9D47005A3C19 /* Assets.xcassets */; };
 		4C0E8C3C1E7E9D47005A3C19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C0E8C3A1E7E9D47005A3C19 /* LaunchScreen.storyboard */; };
 		4C1BFCB71E7EB034000A2282 /* KZSwipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1BFCB61E7EB034000A2282 /* KZSwipeTableViewCell.swift */; };
+		4C230C781E8423FE008C27CF /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C230C731E8423FA008C27CF /* Chameleon.framework */; };
+		4C230C791E8423FE008C27CF /* Chameleon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C230C731E8423FA008C27CF /* Chameleon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C32587C1E81BFE800922D40 /* ToDoTaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32587B1E81BFE800922D40 /* ToDoTaskModel.swift */; };
 		4C32587E1E81C0C200922D40 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32587D1E81C0C200922D40 /* Extensions.swift */; };
 		4CE85D761E8058CB00708D84 /* DGElasticPullToRefreshConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE85D711E8058CB00708D84 /* DGElasticPullToRefreshConstants.swift */; };
@@ -24,6 +26,37 @@
 		8FD705EE4F808657E756F35E /* Pods_EZTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3222A67AC8F89353FEC486 /* Pods_EZTask.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4C230C721E8423FA008C27CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C230C6C1E8423FA008C27CF /* Chameleon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 240093F81BB4517400932727;
+			remoteInfo = Chameleon;
+		};
+		4C230C741E8423FA008C27CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C230C6C1E8423FA008C27CF /* Chameleon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 247EB8A71BB61EB3009B4904;
+			remoteInfo = ChameleonDemo;
+		};
+		4C230C761E8423FA008C27CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C230C6C1E8423FA008C27CF /* Chameleon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0C8DABB11C07B5EA00B28FE2;
+			remoteInfo = "ChameleonDemo-Objc";
+		};
+		4C230C7A1E8423FE008C27CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C230C6C1E8423FA008C27CF /* Chameleon.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 240093F71BB4517400932727;
+			remoteInfo = Chameleon;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		4CFA07051E7F0F3600C22F1B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -31,6 +64,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4C230C791E8423FE008C27CF /* Chameleon.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,6 +82,7 @@
 		4C0E8C3B1E7E9D47005A3C19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C0E8C3D1E7E9D47005A3C19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C1BFCB61E7EB034000A2282 /* KZSwipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KZSwipeTableViewCell.swift; sourceTree = "<group>"; };
+		4C230C6C1E8423FA008C27CF /* Chameleon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Chameleon.xcodeproj; path = ../../../Chameleon/Chameleon.xcodeproj; sourceTree = "<group>"; };
 		4C32587B1E81BFE800922D40 /* ToDoTaskModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoTaskModel.swift; sourceTree = "<group>"; };
 		4C32587D1E81C0C200922D40 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4CE85D711E8058CB00708D84 /* DGElasticPullToRefreshConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGElasticPullToRefreshConstants.swift; sourceTree = "<group>"; };
@@ -65,6 +100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FD705EE4F808657E756F35E /* Pods_EZTask.framework in Frameworks */,
+				4C230C781E8423FE008C27CF /* Chameleon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +146,16 @@
 			path = EZTask;
 			sourceTree = "<group>";
 		};
+		4C230C6D1E8423FA008C27CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C230C731E8423FA008C27CF /* Chameleon.framework */,
+				4C230C751E8423FA008C27CF /* ChameleonDemo.app */,
+				4C230C771E8423FA008C27CF /* ChameleonDemo-Objc.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4CB5A3911E7EA98E002DA155 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +187,7 @@
 				4CE85D701E8058CB00708D84 /* DGElasticPullToRefresh */,
 				4C32587D1E81C0C200922D40 /* Extensions.swift */,
 				4C1BFCB61E7EB034000A2282 /* KZSwipeTableViewCell.swift */,
+				4C230C6C1E8423FA008C27CF /* Chameleon.xcodeproj */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -203,6 +250,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4C230C7B1E8423FE008C27CF /* PBXTargetDependency */,
 			);
 			name = EZTask;
 			productName = EZTask;
@@ -237,12 +285,42 @@
 			mainGroup = 4C0E8C251E7E9D47005A3C19;
 			productRefGroup = 4C0E8C2F1E7E9D47005A3C19 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4C230C6D1E8423FA008C27CF /* Products */;
+					ProjectRef = 4C230C6C1E8423FA008C27CF /* Chameleon.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				4C0E8C2D1E7E9D47005A3C19 /* EZTask */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4C230C731E8423FA008C27CF /* Chameleon.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Chameleon.framework;
+			remoteRef = 4C230C721E8423FA008C27CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4C230C751E8423FA008C27CF /* ChameleonDemo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ChameleonDemo.app;
+			remoteRef = 4C230C741E8423FA008C27CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4C230C771E8423FA008C27CF /* ChameleonDemo-Objc.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "ChameleonDemo-Objc.app";
+			remoteRef = 4C230C761E8423FA008C27CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4C0E8C2C1E7E9D47005A3C19 /* Resources */ = {
@@ -338,6 +416,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4C230C7B1E8423FE008C27CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Chameleon;
+			targetProxy = 4C230C7A1E8423FE008C27CF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4C0E8C351E7E9D47005A3C19 /* Main.storyboard */ = {
