@@ -22,6 +22,8 @@ class ToDoController: UIViewController
     
     let uiRealm = try! Realm()
     
+    var savedTasks: SavedTasksModel!
+    
     var openTasks = [ToDoTaskModel]()
     
     var completedTasks = [ToDoTaskModel]()
@@ -141,6 +143,7 @@ extension ToDoController: UITextFieldDelegate
         }
         
         openTasks = openTasks.reversed()
+        updateTasks()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
@@ -261,6 +264,7 @@ extension ToDoController
             
             toDoTableView.scrollToRow(at: nPath, at: .top, animated: true)
         }
+        updateTasks()
     }
     
     func unmarkTaskCompleted(_ cell: KZSwipeTableViewCell)
@@ -295,27 +299,55 @@ extension ToDoController
                     }
             })
         }
+        updateTasks()
     }
 }
 
 extension ToDoController: UITableViewDataSource
 {
     func retrieveTasks()
-    {
-        openTasks.removeAll()
-        completedTasks.removeAll()
-        
-        let _openTasks = uiRealm.objects(ToDoTaskModel).filter("isCompleted = false")
-        let _completedTasks = uiRealm.objects(ToDoTaskModel).filter("isCompleted = false")
-        
-        for openTask in _openTasks
+    { 
+        if let availableTasks = uiRealm.objects(SavedTasksModel.self).first
         {
-            openTasks.append(openTask)
+            let _openTasks = availableTasks.openTasks
+            let _completedTasks = availableTasks.completedTasks
+            
+            for oTask in _openTasks
+            {
+                openTasks.append(oTask)
+            }
+            
+            for cTask in _completedTasks
+            {
+                completedTasks.append(cTask)
+            }
+        }
+    }
+    
+    func updateTasks()
+    {
+        let _savedTasks = SavedTasksModel()
+        _savedTasks.id = 0
+        
+        try! uiRealm.write
+        {
+            _savedTasks.openTasks.removeAll()
+            _savedTasks.completedTasks.removeAll()
         }
         
-        for completedTask in _completedTasks
+        for openTask in openTasks
         {
-            completedTasks.append(completedTask)
+            _savedTasks.openTasks.append(openTask)
+        }
+        
+        for completedTask in completedTasks
+        {
+            _savedTasks.completedTasks.append(completedTask)
+        }
+        
+        try! uiRealm.write
+        {
+            uiRealm.add(_savedTasks, update: true)
         }
     }
     
