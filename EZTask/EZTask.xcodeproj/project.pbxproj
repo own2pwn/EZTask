@@ -147,8 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				4CB5A3911E7EA98E002DA155 /* Controllers */,
-				4CB5A3921E7EA9CA002DA155 /* View */,
 				4CB5A3931E7EA9D0002DA155 /* Model */,
+				4CB5A3921E7EA9CA002DA155 /* View */,
 				4CB5A3951E7EA9DE002DA155 /* GUI */,
 				4CB5A3941E7EA9D7002DA155 /* Helpers */,
 				4CB5A3961E7EA9E6002DA155 /* Other */,
@@ -186,8 +186,8 @@
 		4CB5A3931E7EA9D0002DA155 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4C32587B1E81BFE800922D40 /* ToDoTaskModel.swift */,
 				4CEF6C001E843934003F10FB /* SavedTasksModel.swift */,
+				4C32587B1E81BFE800922D40 /* ToDoTaskModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,10 +196,10 @@
 			isa = PBXGroup;
 			children = (
 				4CE85D701E8058CB00708D84 /* DGElasticPullToRefresh */,
+				4C230C6C1E8423FA008C27CF /* Chameleon.xcodeproj */,
+				4CEF6BFC1E8437CD003F10FB /* Constants.swift */,
 				4C32587D1E81C0C200922D40 /* Extensions.swift */,
 				4C1BFCB61E7EB034000A2282 /* KZSwipeTableViewCell.swift */,
-				4CEF6BFC1E8437CD003F10FB /* Constants.swift */,
-				4C230C6C1E8423FA008C27CF /* Chameleon.xcodeproj */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -238,11 +238,11 @@
 			isa = PBXGroup;
 			children = (
 				4C0E8C331E7E9D47005A3C19 /* ToDoController.swift */,
-				4CEF6C031E843DDE003F10FB /* ToDoControllerTextFieldDelegate.swift */,
-				4C5A8E4C1E84585B0027A38E /* ToDoControllerTableViewDelegate.swift */,
 				4C5A8E501E845E3D0027A38E /* ToDoControllerTableViewDataSource.swift */,
+				4C5A8E4C1E84585B0027A38E /* ToDoControllerTableViewDelegate.swift */,
+				4CEF6C031E843DDE003F10FB /* ToDoControllerTextFieldDelegate.swift */,
 			);
-			name = ToDoController;
+			path = ToDoController;
 			sourceTree = "<group>";
 		};
 		893524079556A81A2D4F2B5B /* Pods */ = {

@@ -8,8 +8,3 @@
 
 import Foundation
 
-enum kUserDefaults
-{
-    static let OpenTasksKey = "openTasksKey"
-    static let CompletedTasksKey = "completedTasksKey"
-}
