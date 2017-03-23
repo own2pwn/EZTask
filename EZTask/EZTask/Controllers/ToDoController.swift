@@ -121,8 +121,6 @@ extension ToDoController: UITextFieldDelegate
         {
             if text.isEmpty || text == " "
             {
-                //                openTasks -= 1
-                
                 try! uiRealm.write
                 {
                     uiRealm.delete(uiRealm.objects(ToDoTaskModel).last!)
@@ -130,10 +128,17 @@ extension ToDoController: UITextFieldDelegate
                 
                 toDoTableView.deleteRows(at: [nPath], with: .fade)
             }
+            else
+            {
+                try! uiRealm.write
+                {
+                    let lastOpenTask = uiRealm.objects(ToDoTaskModel).last!
+                    lastOpenTask.title = textField.text ?? ""
+                }
+            }
         }
         else
         {
-            //            openTasks -= 1
             try! uiRealm.write
             {
                 uiRealm.delete(uiRealm.objects(ToDoTaskModel).last!)
@@ -158,13 +163,27 @@ extension ToDoController: UITableViewDelegate
     {
         let timer = UITableViewRowAction(style: .normal, title: "Напомнить")
         { action, index in
-            print("More")
         }
         timer.backgroundColor = .flatYellow
         
         let del = UITableViewRowAction(style: .default, title: "Удалить")
         { action, index in
-            print("delete")
+            
+            try! self.uiRealm.write
+            {
+                let section = indexPath.section
+                
+                if section == 0
+                {
+                    self.uiRealm.delete(self.openTasks[indexPath.row])
+                }
+                else
+                {
+                    self.uiRealm.delete(self.completedTasks[indexPath.row])
+                }
+                self.toDoTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            
         }
         del.backgroundColor = .red
         return [del, timer]
@@ -183,9 +202,6 @@ extension ToDoController
         let clockView = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "watchesIcon"))
         let yellowColor = UIColor(red: 254.0 / 255.0, green: 217.0 / 255.0, blue: 56.0 / 255.0, alpha: 1.0)
         
-        _ = KZSwipeTableViewCell.viewWithImage(#imageLiteral(resourceName: "sticksIconIcon"))
-        _ = UIColor(red: 206.0 / 255.0, green: 149.0 / 255.0, blue: 98.0 / 255.0, alpha: 1.0)
-        
         if let bgView = self.toDoTableView.backgroundView
         {
             if let bgColor = bgView.backgroundColor
@@ -194,7 +210,18 @@ extension ToDoController
             }
         }
         
-        cell.toDoTextField.text = "mem"
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        if section == 0
+        {
+            cell.toDoTextField.text = openTasks[row].title
+        }
+        else
+        {
+            cell.toDoTextField.text = completedTasks[row].title
+        }
+        
         cell.toDoTextField.isUserInteractionEnabled = false
         cell.settings.secondTrigger = 0.66
         cell.settings.startImmediately = true
@@ -311,7 +338,7 @@ extension ToDoController: UITableViewDataSource
         cell.backgroundColor = .white
         if section == 1
         {
-            let attributeString = NSMutableAttributedString(string: (cell.toDoTextField?.text)!)
+            let attributeString = NSMutableAttributedString(string: completedTasks[indexPath.row].title)
             attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, attributeString.length))
             
             cell.toDoTextField?.attributedText = attributeString
