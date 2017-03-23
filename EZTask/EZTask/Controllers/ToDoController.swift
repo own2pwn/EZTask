@@ -22,9 +22,9 @@ class ToDoController: UIViewController
     
     let uiRealm = try! Realm()
     
-    var openTasks: Results<ToDoTaskModel>!
+    var openTasks = [ToDoTaskModel]()
     
-    var completedTasks: Results<ToDoTaskModel>!
+    var completedTasks = [ToDoTaskModel]()
     
     var onViewTapGesture = UITapGestureRecognizer()
     
@@ -61,10 +61,10 @@ class ToDoController: UIViewController
             
             try! self?.uiRealm.write
             {
-                self?.uiRealm.add(ToDoTaskModel())
+                let newTask = ToDoTaskModel()
+                
+                self?.openTasks.append(newTask)
             }
-            
-            //            self?.openTasks += 1
             
             let nPath = IndexPath(row: 0, section: 0)
             self?.toDoTableView.insertRows(at: [nPath], with: .fade)
@@ -121,10 +121,12 @@ extension ToDoController: UITextFieldDelegate
         {
             if text.isEmpty || text == " "
             {
-                try! uiRealm.write
-                {
-                    uiRealm.delete(uiRealm.objects(ToDoTaskModel).last!)
-                }
+                openTasks.removeLast()
+                
+                //                try! uiRealm.write
+                //                {
+                //                    uiRealm.delete(uiRealm.objects(ToDoTaskModel).last!)
+                //                }
                 
                 toDoTableView.deleteRows(at: [nPath], with: .fade)
             }
@@ -132,19 +134,23 @@ extension ToDoController: UITextFieldDelegate
             {
                 try! uiRealm.write
                 {
-                    let lastOpenTask = uiRealm.objects(ToDoTaskModel).last!
-                    lastOpenTask.title = textField.text ?? ""
+                    //                    let lastOpenTask = uiRealm.objects(ToDoTaskModel).last!
+                    let lastOpenTask = openTasks.last
+                    lastOpenTask?.title = textField.text ?? ""
                 }
             }
         }
         else
         {
-            try! uiRealm.write
-            {
-                uiRealm.delete(uiRealm.objects(ToDoTaskModel).last!)
-            }
+            openTasks.removeLast()
+            //            try! uiRealm.write
+            //            {
+            //                uiRealm.delete(uiRealm.objects(ToDoTaskModel).last!)
+            //            }
             toDoTableView.deleteRows(at: [nPath], with: .fade)
         }
+        
+        openTasks = openTasks.reversed()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
@@ -169,20 +175,30 @@ extension ToDoController: UITableViewDelegate
         let del = UITableViewRowAction(style: .default, title: "Удалить")
         { action, index in
             
-            try! self.uiRealm.write
+            let section = indexPath.section
+            if section == 0
             {
-                let section = indexPath.section
-                
-                if section == 0
-                {
-                    self.uiRealm.delete(self.openTasks[indexPath.row])
-                }
-                else
-                {
-                    self.uiRealm.delete(self.completedTasks[indexPath.row])
-                }
-                self.toDoTableView.deleteRows(at: [indexPath], with: .fade)
+                self.openTasks.remove(at: indexPath.row)
             }
+            else
+            {
+                self.completedTasks.remove(at: indexPath.row)
+            }
+            
+            //            try! self.uiRealm.write
+            //            {
+            //                let section = indexPath.section
+            //
+            //                if section == 0
+            //                {
+            //                    self.uiRealm.delete(self.openTasks[indexPath.row])
+            //                }
+            //                else
+            //                {
+            //                    self.uiRealm.delete(self.completedTasks[indexPath.row])
+            //                }
+            //                self.toDoTableView.deleteRows(at: [indexPath], with: .fade)
+            //            }
             
         }
         del.backgroundColor = .red
@@ -256,10 +272,12 @@ extension ToDoController
         {
             let task = openTasks[indexPath.row]
             
-            try! uiRealm.write
-            {
-                task.isCompleted = true
-            }
+            let newCompletedTask = ToDoTaskModel()
+            newCompletedTask.isCompleted = true
+            newCompletedTask.title = task.title
+            
+            openTasks.remove(at: indexPath.row)
+            completedTasks.insert(newCompletedTask, at: 0)
             
             let nPath = IndexPath(row: 0, section: 1)
             
@@ -275,10 +293,13 @@ extension ToDoController
         if let indexPath = toDoTableView.indexPath(for: cell)
         {
             let task = completedTasks[indexPath.row]
-            try! uiRealm.write
-            {
-                task.isCompleted = false
-            }
+            
+            let newUnmarkedTask = ToDoTaskModel()
+            newUnmarkedTask.isCompleted = false
+            newUnmarkedTask.title = task.title
+            
+            completedTasks.remove(at: indexPath.row)
+            openTasks.insert(newUnmarkedTask, at: 0)
             
             let nPath = IndexPath(row: 0, section: 0)
             
@@ -306,8 +327,21 @@ extension ToDoController: UITableViewDataSource
 {
     func retrieveTasks()
     {
-        openTasks = uiRealm.objects(ToDoTaskModel).filter("isCompleted = false")
-        completedTasks = uiRealm.objects(ToDoTaskModel).filter("isCompleted = true")
+        openTasks.removeAll()
+        completedTasks.removeAll()
+        
+        let _openTasks = uiRealm.objects(ToDoTaskModel).filter("isCompleted = false")
+        let _completedTasks = uiRealm.objects(ToDoTaskModel).filter("isCompleted = false")
+        
+        for openTask in _openTasks
+        {
+            openTasks.append(openTask)
+        }
+        
+        for completedTask in _completedTasks
+        {
+            completedTasks.append(completedTask)
+        }
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
