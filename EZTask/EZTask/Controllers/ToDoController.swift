@@ -49,7 +49,6 @@ class ToDoController: UIViewController
         setupDelegates()
         retrieveTasks()
         setupNavigationController()
-        setupRefreshController()
     }
     
     // MARK: - Logic setup
@@ -60,6 +59,7 @@ class ToDoController: UIViewController
         
         tableViewDelegate = ToDoControllerTableViewDelegate(self, textFieldDelegate: textFieldDelegate)
         self.toDoTableView.delegate = tableViewDelegate
+        tableViewDelegate?.setupRefreshController()
     }
     
     // MARK: - View setup
@@ -71,36 +71,6 @@ class ToDoController: UIViewController
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.clipsToBounds = true
         navigationItem.title = "To-Do List"
-    }
-    
-    func setupRefreshController()
-    {
-        let loadingView = DGElasticPullToRefreshLoadingViewCircle()
-        loadingView.tintColor = .yellow
-        
-        toDoTableView.dg_addPullToRefreshWithActionHandler({ [weak self]() -> Void in
-            
-            try! self?.uiRealm.write
-            {
-                let newTask = ToDoTaskModel()
-                
-                self?.openTasks.append(newTask)
-            }
-            
-            let nPath = IndexPath(row: 0, section: 0)
-            self?.toDoTableView.insertRows(at: [nPath], with: .fade)
-            
-            let newTask = self?.toDoTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ToDoCell
-            
-            newTask.toDoTextField.text = ""
-            newTask.toDoTextField.isUserInteractionEnabled = true
-            newTask.toDoTextField.becomeFirstResponder()
-            
-            self?.toDoTableView.dg_stopLoading()
-        }, loadingView: loadingView)
-        
-        toDoTableView.dg_setPullToRefreshFillColor(.appMainGreenColor) // bg color
-        toDoTableView.dg_setPullToRefreshBackgroundColor(toDoTableView.backgroundColor!)
     }
     
     // MARK: - deinit

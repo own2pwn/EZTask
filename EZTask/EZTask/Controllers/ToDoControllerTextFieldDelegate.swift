@@ -12,12 +12,9 @@ class ToDoControllerTextFieldDelegate: NSObject, UITextFieldDelegate
 {
     // MARK: - Properties
     
-    // MARK: Delegate
-    
-    weak var delegate: ToDoController?
-    
-    // MARK: Variables
-    
+    /// Delegate to communicate with ToDoController
+    fileprivate weak var delegate: ToDoController?
+    /// Hides keyboard on screen anywhere tap
     var onViewTapGesture: UITapGestureRecognizer!
     
     // MARK: - Initialization
