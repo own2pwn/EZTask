@@ -17,6 +17,8 @@
 		4C230C791E8423FE008C27CF /* Chameleon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C230C731E8423FA008C27CF /* Chameleon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C32587C1E81BFE800922D40 /* ToDoTaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32587B1E81BFE800922D40 /* ToDoTaskModel.swift */; };
 		4C32587E1E81C0C200922D40 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32587D1E81C0C200922D40 /* Extensions.swift */; };
+		4C5A8E4D1E84585B0027A38E /* ToDoControllerTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A8E4C1E84585B0027A38E /* ToDoControllerTableViewDelegate.swift */; };
+		4C5A8E511E845E3D0027A38E /* ToDoControllerTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A8E501E845E3D0027A38E /* ToDoControllerTableViewDataSource.swift */; };
 		4CE85D761E8058CB00708D84 /* DGElasticPullToRefreshConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE85D711E8058CB00708D84 /* DGElasticPullToRefreshConstants.swift */; };
 		4CE85D771E8058CB00708D84 /* DGElasticPullToRefreshExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE85D721E8058CB00708D84 /* DGElasticPullToRefreshExtensions.swift */; };
 		4CE85D781E8058CB00708D84 /* DGElasticPullToRefreshLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE85D731E8058CB00708D84 /* DGElasticPullToRefreshLoadingView.swift */; };
@@ -25,6 +27,7 @@
 		4CE85D7C1E80624500708D84 /* ToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE85D7B1E80624500708D84 /* ToDoCell.swift */; };
 		4CEF6BFD1E8437CD003F10FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEF6BFC1E8437CD003F10FB /* Constants.swift */; };
 		4CEF6C011E843934003F10FB /* SavedTasksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEF6C001E843934003F10FB /* SavedTasksModel.swift */; };
+		4CEF6C041E843DDE003F10FB /* ToDoControllerTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEF6C031E843DDE003F10FB /* ToDoControllerTextFieldDelegate.swift */; };
 		8FD705EE4F808657E756F35E /* Pods_EZTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3222A67AC8F89353FEC486 /* Pods_EZTask.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +90,8 @@
 		4C230C6C1E8423FA008C27CF /* Chameleon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Chameleon.xcodeproj; path = ../../../Chameleon/Chameleon.xcodeproj; sourceTree = "<group>"; };
 		4C32587B1E81BFE800922D40 /* ToDoTaskModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoTaskModel.swift; sourceTree = "<group>"; };
 		4C32587D1E81C0C200922D40 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		4C5A8E4C1E84585B0027A38E /* ToDoControllerTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoControllerTableViewDelegate.swift; sourceTree = "<group>"; };
+		4C5A8E501E845E3D0027A38E /* ToDoControllerTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoControllerTableViewDataSource.swift; sourceTree = "<group>"; };
 		4CE85D711E8058CB00708D84 /* DGElasticPullToRefreshConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGElasticPullToRefreshConstants.swift; sourceTree = "<group>"; };
 		4CE85D721E8058CB00708D84 /* DGElasticPullToRefreshExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGElasticPullToRefreshExtensions.swift; sourceTree = "<group>"; };
 		4CE85D731E8058CB00708D84 /* DGElasticPullToRefreshLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGElasticPullToRefreshLoadingView.swift; sourceTree = "<group>"; };
@@ -95,6 +100,7 @@
 		4CE85D7B1E80624500708D84 /* ToDoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoCell.swift; sourceTree = "<group>"; };
 		4CEF6BFC1E8437CD003F10FB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4CEF6C001E843934003F10FB /* SavedTasksModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTasksModel.swift; sourceTree = "<group>"; };
+		4CEF6C031E843DDE003F10FB /* ToDoControllerTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoControllerTextFieldDelegate.swift; sourceTree = "<group>"; };
 		FD3222A67AC8F89353FEC486 /* Pods_EZTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -141,11 +147,11 @@
 			isa = PBXGroup;
 			children = (
 				4CB5A3911E7EA98E002DA155 /* Controllers */,
+				4CB5A3921E7EA9CA002DA155 /* View */,
+				4CB5A3931E7EA9D0002DA155 /* Model */,
 				4CB5A3951E7EA9DE002DA155 /* GUI */,
 				4CB5A3941E7EA9D7002DA155 /* Helpers */,
-				4CB5A3931E7EA9D0002DA155 /* Model */,
 				4CB5A3961E7EA9E6002DA155 /* Other */,
-				4CB5A3921E7EA9CA002DA155 /* View */,
 			);
 			path = EZTask;
 			sourceTree = "<group>";
@@ -164,7 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				4C0E8C311E7E9D47005A3C19 /* AppDelegate.swift */,
-				4C0E8C331E7E9D47005A3C19 /* ToDoController.swift */,
+				4CEF6C021E843DAD003F10FB /* ToDoController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -226,6 +232,17 @@
 				4CE85D751E8058CB00708D84 /* DGElasticPullToRefreshView.swift */,
 			);
 			path = DGElasticPullToRefresh;
+			sourceTree = "<group>";
+		};
+		4CEF6C021E843DAD003F10FB /* ToDoController */ = {
+			isa = PBXGroup;
+			children = (
+				4C0E8C331E7E9D47005A3C19 /* ToDoController.swift */,
+				4CEF6C031E843DDE003F10FB /* ToDoControllerTextFieldDelegate.swift */,
+				4C5A8E4C1E84585B0027A38E /* ToDoControllerTableViewDelegate.swift */,
+				4C5A8E501E845E3D0027A38E /* ToDoControllerTableViewDataSource.swift */,
+			);
+			name = ToDoController;
 			sourceTree = "<group>";
 		};
 		893524079556A81A2D4F2B5B /* Pods */ = {
@@ -415,6 +432,9 @@
 				4CEF6C011E843934003F10FB /* SavedTasksModel.swift in Sources */,
 				4CE85D791E8058CB00708D84 /* DGElasticPullToRefreshLoadingViewCircle.swift in Sources */,
 				4C32587C1E81BFE800922D40 /* ToDoTaskModel.swift in Sources */,
+				4CEF6C041E843DDE003F10FB /* ToDoControllerTextFieldDelegate.swift in Sources */,
+				4C5A8E4D1E84585B0027A38E /* ToDoControllerTableViewDelegate.swift in Sources */,
+				4C5A8E511E845E3D0027A38E /* ToDoControllerTableViewDataSource.swift in Sources */,
 				4C1BFCB71E7EB034000A2282 /* KZSwipeTableViewCell.swift in Sources */,
 				4CE85D7C1E80624500708D84 /* ToDoCell.swift in Sources */,
 				4C32587E1E81C0C200922D40 /* Extensions.swift in Sources */,

@@ -12,4 +12,13 @@ class ToDoCell: KZSwipeTableViewCell
 {
     @IBOutlet weak var toDoTextField: UITextField!
     
+    var cellRowIndex = 0
+    
+    func cellWillAppear()
+    {
+        if 0 == cellRowIndex
+        {
+            print("🍏 cellWillAppear")
+        }
+    }
 }
