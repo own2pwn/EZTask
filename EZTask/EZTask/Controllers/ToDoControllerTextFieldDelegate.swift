@@ -12,10 +12,14 @@ class ToDoControllerTextFieldDelegate: NSObject, UITextFieldDelegate
 {
     // MARK: - Properties
     
+    // TODO: create base class ( or protocol) to inherit ToDoController as delegate
+    
     /// Delegate to communicate with ToDoController
     fileprivate weak var delegate: ToDoController?
     /// Hides keyboard on screen anywhere tap
     var onViewTapGesture: UITapGestureRecognizer!
+    /// TableView's Data source delegate
+    weak var dataSourceDelegate: ToDoControllerTableViewDataSource!
     
     // MARK: - Initialization
     
@@ -77,7 +81,7 @@ class ToDoControllerTextFieldDelegate: NSObject, UITextFieldDelegate
         }
         
         delegate?.openTasks = (delegate?.openTasks.reversed())!
-        delegate?.updateTasks()
+        dataSourceDelegate.updateTasks()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
