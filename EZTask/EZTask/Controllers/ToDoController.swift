@@ -123,18 +123,12 @@ extension ToDoController: UITextFieldDelegate
             {
                 openTasks.removeLast()
                 
-                //                try! uiRealm.write
-                //                {
-                //                    uiRealm.delete(uiRealm.objects(ToDoTaskModel).last!)
-                //                }
-                
                 toDoTableView.deleteRows(at: [nPath], with: .fade)
             }
             else
             {
                 try! uiRealm.write
                 {
-                    //                    let lastOpenTask = uiRealm.objects(ToDoTaskModel).last!
                     let lastOpenTask = openTasks.last
                     lastOpenTask?.title = textField.text ?? ""
                 }
@@ -143,10 +137,6 @@ extension ToDoController: UITextFieldDelegate
         else
         {
             openTasks.removeLast()
-            //            try! uiRealm.write
-            //            {
-            //                uiRealm.delete(uiRealm.objects(ToDoTaskModel).last!)
-            //            }
             toDoTableView.deleteRows(at: [nPath], with: .fade)
         }
         
@@ -172,7 +162,7 @@ extension ToDoController: UITableViewDelegate
         }
         timer.backgroundColor = .flatYellow
         
-        let del = UITableViewRowAction(style: .default, title: "Удалить")
+        let del = UITableViewRowAction(style: .destructive, title: "Удалить")
         { action, index in
             
             let section = indexPath.section
@@ -184,22 +174,7 @@ extension ToDoController: UITableViewDelegate
             {
                 self.completedTasks.remove(at: indexPath.row)
             }
-            
-            //            try! self.uiRealm.write
-            //            {
-            //                let section = indexPath.section
-            //
-            //                if section == 0
-            //                {
-            //                    self.uiRealm.delete(self.openTasks[indexPath.row])
-            //                }
-            //                else
-            //                {
-            //                    self.uiRealm.delete(self.completedTasks[indexPath.row])
-            //                }
-            //                self.toDoTableView.deleteRows(at: [indexPath], with: .fade)
-            //            }
-            
+            self.toDoTableView.deleteRows(at: [indexPath], with: .fade)
         }
         del.backgroundColor = .red
         return [del, timer]
