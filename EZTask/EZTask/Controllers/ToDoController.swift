@@ -20,6 +20,12 @@ class ToDoController: UIViewController
     
     // MARK: - Properties
     
+    // MARK: Delegates
+    
+    weak var textFieldDelegate: ToDoControllerTextFieldDelegate!
+    
+    // MARK: Variables
+    
     let uiRealm = try! Realm()
     
     var savedTasks: SavedTasksModel!
@@ -41,6 +47,13 @@ class ToDoController: UIViewController
         retrieveTasks()
         setupNavigationController()
         setupRefreshController()
+    }
+    
+    // MARK: - Logic setup
+    
+    func setupDelegates()
+    {
+        textFieldDelegate = ToDoControllerTextFieldDelegate()
     }
     
     // MARK: - View setup
@@ -158,6 +171,14 @@ extension ToDoController: UITextFieldDelegate
 
 extension ToDoController: UITableViewDelegate
 {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    {
+        if let cell = cell as? ToDoCell
+        {
+            cell.toDoTextField.delegate = textFieldDelegate
+        }
+    }
+    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
     {
         let timer = UITableViewRowAction(style: .normal, title: "Напомнить")
@@ -306,7 +327,7 @@ extension ToDoController
 extension ToDoController: UITableViewDataSource
 {
     func retrieveTasks()
-    { 
+    {
         if let availableTasks = uiRealm.objects(SavedTasksModel.self).first
         {
             let _openTasks = availableTasks.openTasks
