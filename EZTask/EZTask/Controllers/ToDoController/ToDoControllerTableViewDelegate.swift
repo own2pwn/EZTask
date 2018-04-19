@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ToDoControllerTableViewDelegate: NSObject, UITableViewDelegate
+final class ToDoControllerTableViewDelegate: NSObject, UITableViewDelegate
 {
     // MARK: - Properties
     
