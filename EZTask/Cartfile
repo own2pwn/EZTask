@@ -1,0 +1,12 @@
+###
+### Persistence
+###
+
+github "realm/realm-cocoa"
+
+
+###
+### Logging
+###
+
+github "SwiftyBeaver/SwiftyBeaver"
