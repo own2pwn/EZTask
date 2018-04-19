@@ -44,7 +44,7 @@ class ToDoControllerTableViewDelegate: NSObject, UITableViewDelegate
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = .yellow
         
-        toDoTableView.dg_addPullToRefreshWithActionHandler({ [weak self]() -> Void in
+        toDoTableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
             
             try! self?.delegate?.uiRealm.write
             {
@@ -107,8 +107,8 @@ class ToDoControllerTableViewDelegate: NSObject, UITableViewDelegate
         
         // TODO: add gradient & animation on color changing
         
-        cell.setSwipeGestureWith(checkView, color: greenColor, mode: .exit, state: .state1, completionBlock: { [weak self](cell, state, mode) -> Void in
-            print("Marked task as done")
+        cell.setSwipeGestureWith(checkView, color: greenColor, mode: .exit, state: .state1, completionBlock: { [weak self] (cell, _, _) -> Void in
+            log.debug("Marked task as done")
             
             if section == 0
             {
@@ -120,8 +120,8 @@ class ToDoControllerTableViewDelegate: NSObject, UITableViewDelegate
             }
         })
         
-        cell.setSwipeGestureWith(clockView, color: yellowColor, mode: .none, state: .state3, completionBlock: { (cell, state, mode) -> Void in
-            print("Snoozing task")
+        cell.setSwipeGestureWith(clockView, color: yellowColor, mode: .none, state: .state3, completionBlock: { (_, _, _) -> Void in
+            log.debug("Snoozing task")
         })
     }
     
@@ -138,12 +138,12 @@ class ToDoControllerTableViewDelegate: NSObject, UITableViewDelegate
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
     {
         let timer = UITableViewRowAction(style: .normal, title: "Напомнить")
-        { action, index in
+        { _, _ in
         }
         timer.backgroundColor = .flatYellow
         
         let del = UITableViewRowAction(style: .destructive, title: "Удалить")
-        { [weak self] action, index in
+        { [weak self] _, _ in
             
             (indexPath.section == 0) ? self?.delegate?.openTasks.remove(at: indexPath.row) : self?.delegate?.completedTasks.remove(at: indexPath.row)
             

@@ -8,17 +8,17 @@
 
 import UIKit
 
-class ToDoCell: KZSwipeTableViewCell
+final class ToDoCell: KZSwipeTableViewCell
 {
-    @IBOutlet weak var toDoTextField: UITextField!
-    
+    @IBOutlet var toDoTextField: UITextField!
+
     var cellRowIndex = 0
-    
+
     func cellWillAppear()
     {
         if 0 == cellRowIndex
         {
-            print("🍏 cellWillAppear")
+            log.debug("🍏 cellWillAppear")
         }
     }
 }

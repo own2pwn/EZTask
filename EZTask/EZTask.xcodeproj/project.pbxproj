@@ -32,6 +32,9 @@
 		B950C6692089101E00783738 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B950C6652089101A00783738 /* Realm.framework */; };
 		B950C66A2089101E00783738 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B950C6652089101A00783738 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B950C66C2089101E00783738 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B950C6662089101A00783738 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B9D93CCC208911010034F5C9 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D93CC8208910FC0034F5C9 /* SwiftyBeaver.framework */; };
+		B9D93CCD208911010034F5C9 /* SwiftyBeaver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B9D93CC8208910FC0034F5C9 /* SwiftyBeaver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B9D93CD02089113E0034F5C9 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D93CCF2089113E0034F5C9 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				B950C66A2089101E00783738 /* Realm.framework in Embed Frameworks */,
+				B9D93CCD208911010034F5C9 /* SwiftyBeaver.framework in Embed Frameworks */,
 				4C230C791E8423FE008C27CF /* Chameleon.framework in Embed Frameworks */,
 				B950C66C2089101E00783738 /* RealmSwift.framework in Embed Frameworks */,
 			);
@@ -106,6 +110,8 @@
 		4CEF6C031E843DDE003F10FB /* ToDoControllerTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoControllerTextFieldDelegate.swift; sourceTree = "<group>"; };
 		B950C6652089101A00783738 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		B950C6662089101A00783738 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		B9D93CC8208910FC0034F5C9 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
+		B9D93CCF2089113E0034F5C9 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9D93CCC208911010034F5C9 /* SwiftyBeaver.framework in Frameworks */,
 				B950C6692089101E00783738 /* Realm.framework in Frameworks */,
 				B950C6682089101A00783738 /* RealmSwift.framework in Frameworks */,
 				4C230C781E8423FE008C27CF /* Chameleon.framework in Frameworks */,
@@ -142,6 +149,7 @@
 		4C0E8C301E7E9D47005A3C19 /* EZTask */ = {
 			isa = PBXGroup;
 			children = (
+				B9D93CCE2089112E0034F5C9 /* Common */,
 				4CB5A3911E7EA98E002DA155 /* Controllers */,
 				4CB5A3951E7EA9DE002DA155 /* GUI */,
 				4CB5A3941E7EA9D7002DA155 /* Helpers */,
@@ -244,10 +252,19 @@
 		B950C6622089101A00783738 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B9D93CC8208910FC0034F5C9 /* SwiftyBeaver.framework */,
 				B950C6652089101A00783738 /* Realm.framework */,
 				B950C6662089101A00783738 /* RealmSwift.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B9D93CCE2089112E0034F5C9 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B9D93CCF2089113E0034F5C9 /* Logger.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,6 +397,7 @@
 				4CEF6C011E843934003F10FB /* SavedTasksModel.swift in Sources */,
 				4CE85D791E8058CB00708D84 /* DGElasticPullToRefreshLoadingViewCircle.swift in Sources */,
 				4C32587C1E81BFE800922D40 /* ToDoTaskModel.swift in Sources */,
+				B9D93CD02089113E0034F5C9 /* Logger.swift in Sources */,
 				4CEF6C041E843DDE003F10FB /* ToDoControllerTextFieldDelegate.swift in Sources */,
 				4C5A8E4D1E84585B0027A38E /* ToDoControllerTableViewDelegate.swift in Sources */,
 				4C5A8E511E845E3D0027A38E /* ToDoControllerTableViewDataSource.swift in Sources */,
